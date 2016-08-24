@@ -31,6 +31,7 @@ namespace FerrumChromeDev.Controllers
             //return View();
         }
         private static ContactApi _contactApi;
+        private static CompanyApi _companyApi;
         public ActionResult Index(string callerID)
         {
 
@@ -88,13 +89,27 @@ namespace FerrumChromeDev.Controllers
         public ActionResult AddContact( string CallerID)
         {
 
+
             ContactModel obj = new ContactModel();
             obj.Phone = CallerID;
+
+            _companyApi = new CompanyApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
+
+            List<CompanyFindResult> list2 = _companyApi.FindCompanies("", "CompanyName asc", new int?(1000), new int?(0), new List<string>
+            {
+                "Id",
+                "CompanyName",
+                "CompanyIdentifier"
+            });
+            ViewBag.CompaniesList = new SelectList(list2.AsEnumerable(), "CompanyIdentifier", "CompanyName");
+
+
             return View(obj);
         }
      
 public ActionResult SaveContact(ContactModel obj)
         {
+            _contactApi = new ContactApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
             Contact _contact = new Contact()
             {
                 FirstName = obj.FirstName,
@@ -108,7 +123,8 @@ public ActionResult SaveContact(ContactModel obj)
             };
        var result= _contactApi.AddOrUpdateContact(_contact);
 
-            return View("AddContact");
+            
+            return RedirectToAction("Index", new {callerID =  obj.Phone});
         }
        
     }

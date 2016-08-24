@@ -25,7 +25,7 @@ namespace FerrumChromeDev.Models
             set;
         }
 
-      
+      public string companyIdentifier { get; set; }
         public int? CompanyID { get; set; }
         public string Type { get; set; }
         public string NickName { get;  set; }
