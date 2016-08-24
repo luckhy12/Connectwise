@@ -33,6 +33,7 @@ namespace FerrumChromeDev.Controllers
         private static ContactApi _contactApi;
         public ActionResult Index(string callerID)
         {
+
             if (callerID.StartsWith(" 1"))
             {
                 callerID = callerID.Remove(0, 2);

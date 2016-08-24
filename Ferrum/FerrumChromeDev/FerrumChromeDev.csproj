@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ConnectWiseSDK">
-      <HintPath>..\..\..\Downloads\ConnectWiseSDK.dll</HintPath>
+      <HintPath>C:\Users\Hardeep\Downloads\ConnectWiseSDK.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Database, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FirebaseDatabase.net.1.1.5\lib\portable45-net45+win8+wpa81\Firebase.Database.dll</HintPath>
@@ -244,9 +244,6 @@
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Properties\PublishProfiles\ChromePublish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
