@@ -14,52 +14,86 @@
       @if(Model.FirstName != null)
       {
 
-    <div class="container" style="height:300px;width:300px">
+    
+
+    <div class="container" style="height:300px;width:400px">
         <div class="row">
-            <label style="margin-top:10px;margin-bottom:0px">Incomming CALL </label>
+            <label style="margin-top:10px;margin-bottom:0px">OUTGOING CALL </label>
             <hr />
         </div>
         <br />
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-2">
-                    <div class="row">
-                        <span class="fa fa-phone-square fa-4x" />
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="row">
+                            <span class="fa fa-phone-square fa-4x" />
+                        </div>
+                        <div class="row">&nbsp;</div>
+                      
                     </div>
-                   
+                    <div class="col-md-5" style="margin-left:5px">
+                        <div class="row">
+                            <span style="color:#CCDEE2">@Model.FirstName @Model.LastName</span>
+                        </div>
+                        <div class="row">
+                            <label style="color:lightgray">Callinize-Support</label>
+                        </div>
+                        <div class="row">
+                            <label style="color:darkblue">@Model.Phone</label>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn btn-primary">Lead</button>
+                        </div>
 
+                    </div>
+                    
+                    <div class="pull-right col-md-4">
+                        <div class="row text-center" style="background-color:#DFEFFF;border-radius:15px">
+                            <label>00:00:06</label>
+                            <span>hour:min:sec</span>
+                        </div>
+                        <div class="row">&nbsp;</div>
+                        <div class="row">
+
+                            <a style="color:black;font-size:10px">Email Templates<span class="caret" /></a>
+                            <span style="color:#1979CA" class="pull-right"><i class="fa fa-envelope" aria-hidden="true"></i> </span>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6" style="margin-left:5px">
-                    <div class="row">
-                        <span style="color:#CCDEE2">@Model.FirstName @Model.LastName</span>
-                    </div>
-                    <div class="row">
-                        <label style="color:lightgray">Callinize-Support</label>
-                    </div>
-                    <div class="row">
-                        <label style="color:darkblue">@Model.Phone</label>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn btn-primary">Lead</button>
-                    </div>
 
-                </div>
-                <div class="col-md-3">
+            </div>
 
+            <div class="row">
+                <hr style="border-top: dotted 1px;" />
+                <div class="col-md-12">
+                    <div class="col-md-1">
+                        <span style="color:darkgray"><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></span>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <label style="color:lightgray">Called by Julie 2 day ago</label>
+                        </div>
+                        <div class="row">
+                            <label>- Auto Created by Callinze</label>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:darkblue"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <hr style="border-top: dotted 1px;" />
-        </div>
-        <br />
-        <div class="row" style="background-color:#DFEFFF">
-            <div class="col-md-12">
-                <div class="col-md-9" style="margin-top:6px;margin-bottom:6px">
-                    <input type="text" placeholder="Click here to add notes" class="form-control" />
-                </div>
-                <div class="col-md-3" style="margin-top:6px">
-                    <button type="submit" class="btn btn-primary">SAVE</button>
+            <br />
+            <div class="row" style="background-color:#DFEFFF">
+                <div class="col-md-12">
+                    <div class="col-md-9" style="margin-top:6px;margin-bottom:6px">
+                        <input type="text" placeholder="Click here to add notes" class="form-control" />
+                    </div>
+                    <div class="col-md-3" style="margin-top:6px">
+                        <button type="submit" class="btn btn-primary">SAVE</button>
+                    </div>
                 </div>
             </div>
         </div>
