@@ -60,7 +60,7 @@ namespace FerrumChromeDev.Controllers
             _contactApi = new ContactApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
             new List<ContactModel>();
             ContactModel obj = new ContactModel();
-            obj.ContactId =Convert.ToInt32(callerID);
+            obj.Phone =callerID;
             string conditions = "Phone = '" + callerID + "'";
             List<ContactFindResult> list3 = _contactApi.FindContacts(conditions, "", new int?(1000), new int?(0), "", new List<string>
 	{
