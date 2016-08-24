@@ -1,0 +1,53 @@
+﻿@model FerrumChromeDev.Models.ContactModel
+@{
+    ViewBag.Title = "Home Page";
+    Layout = null;
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script src="~/Scripts/bootstrap.js"></script>
+<div class="container">
+    <div id="Call" class="row">
+        <h1>Call Received</h1>
+
+
+    </div>
+    <div id="CallCome" class="row" hidden>
+        <h1>Another Call is comming</h1>
+
+
+    </div>
+    <br/>
+    <div class="row">
+      @if(Model.FirstName != null)
+      {
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Caller Information</h4>
+            </div>
+            "Id",
+            "FirstName",
+            "LastName",
+            "Type",
+            "CompanyId"
+            <div class="modal-body">
+                <div class="row"><label class="label">FirstName:</label><label>@Model.FirstName</label></div>
+                <div class="row"><label class="label">LastName:</label><label>@Model.LastName</label></div>
+                <div class="row"><label class="label">Type:</label><label>@Model.Type</label></div>
+
+            </div>
+
+        </div>
+      }
+      else
+      {
+          <div>
+              <button onclick="window.open('http://localhost:2154/Home/AddContact?CallerID=@Model.ContactId', '_blank')">Create New Contact </button>
+          </div>
+      }
+
+</div>
+
+

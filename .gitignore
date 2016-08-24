@@ -243,3 +243,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+
+
+Ferrum/FerrumChromeDev/bin
+Ferrum/FerrumChromeDev/obj
