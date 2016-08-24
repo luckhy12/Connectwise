@@ -119,7 +119,8 @@ public ActionResult SaveContact(ContactModel obj)
                 Phone = obj.Phone,
                 Fax = obj.Fax,
                 Email = obj.Email,
-                Id=0
+                Id=0,
+                CompanyIdentifier = obj.companyIdentifier
             };
        var result= _contactApi.AddOrUpdateContact(_contact);
 

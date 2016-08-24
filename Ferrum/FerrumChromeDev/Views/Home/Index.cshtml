@@ -80,7 +80,7 @@
                             <span class="fa fa-phone-square fa-4x" />
                         </div>
                         <div class="row">
-                            <a href="http://localhost:2154/Home/AddContact?CallerID=@Model.Phone">Create</a>
+                            <a href="@Url.Action("AddContact","Home",new {CallerID = Model.Phone })">Create</a>
                         </div>
 
                     </div>
