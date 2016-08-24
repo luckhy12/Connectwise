@@ -8,11 +8,6 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <script src="~/Scripts/bootstrap.js"></script>
 <div class="container">
-    <div id="Call" class="row">
-        <h1>Call Received</h1>
-
-
-    </div>
    
     <br/>
     <div class="row">
@@ -31,9 +26,7 @@
                     <div class="row">
                         <span class="fa fa-phone-square fa-4x" />
                     </div>
-                    <div class="row">
-                        <a href="#">Create</a>
-                    </div>
+                   
 
                 </div>
                 <div class="col-md-6" style="margin-left:5px">
@@ -71,14 +64,44 @@
             </div>
         </div>
     </div>
-     }
+      }
       else
       {
-          <div>
-              <button onclick="window.open('http://localhost:2154/Home/AddContact?CallerID=@Model.Phone', '_blank')">Create New Contact </button>
-          </div>
-      }
 
-</div>
+        <div class="container" style="height:300px;width:300px">
+            <div class="row">
+                <label style="margin-top:10px;margin-bottom:0px">Incomming CALL </label>
+                <hr />
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                        <div class="row">
+                            <span class="fa fa-phone-square fa-4x" />
+                        </div>
+                        <div class="row">
+                            <a href="http://localhost:2154/Home/AddContact?CallerID=@Model.Phone">Create</a>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6" style="margin-left:5px">
+                        <div class="row">
+                            <span style="color:#CCDEE2">No User</span>
+                        </div>
+                        <div class="row">
+                            <label style="color:lightgray">Callinize-Support</label>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+            </div>
+            </div>
+            }
+
+        </div>
 
     </div>

@@ -1,9 +1,10 @@
 ﻿@model FerrumChromeDev.Models.ContactModel
 @{
     ViewBag.Title = "AddContact";
+    
 }
 
-<h2>Add Contact</h2>
+
 
 <div class="container">
     @using(Html.BeginForm("SaveContact" ,"Home" ,FormMethod.Post))
@@ -17,29 +18,19 @@
         <label for="inputPassword">Last Name :</label>
         @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
     </div>
-    <div class="form-group">
-        <label for="inputPassword">NickName :</label>
-        @Html.TextBoxFor(x => x.NickName, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        <label for="inputPassword">Title :</label>
-        @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
-    </div>
+    
    
-    <div class="form-group">
-        <label for="inputPassword">Fax :</label>
-        @Html.TextBoxFor(x => x.Fax, new { @class = "form-control" })
-    </div>
     <div class="form-group">
         <label for="inputPassword">Email :</label>
         @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
-        @Html.DropDownListFor(r=>r.companyIdentifier,(IEnumerable<SelectListItem>)ViewBag.CompaniesList,"Select Company",new {@id="comapanyDD" })
+        <label for="inputPassword">Company :</label>
+        @Html.DropDownListFor(r => r.companyIdentifier, (IEnumerable<SelectListItem>)ViewBag.CompaniesList, "Select Company", new { @id = "comapanyDD", @class = "form-control" })
     </div>
    
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-primary">Save</button>
 
 
 
