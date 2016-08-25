@@ -35,7 +35,7 @@ namespace FerrumChromeDev.Controllers
         private static ActivityApi _activityApi;
 
 
-        public ActionResult Index(string callerID)
+        public ActionResult Index(string callerID="1234")
         {
 
             if (callerID.StartsWith(" 1"))
@@ -63,16 +63,16 @@ namespace FerrumChromeDev.Controllers
             _contactApi = new ContactApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
             new List<ContactModel>();
             ContactModel obj = new ContactModel();
-            obj.Phone =callerID;
+            obj.Phone = callerID;
             string conditions = "Phone = '" + callerID + "'";
             List<ContactFindResult> list3 = _contactApi.FindContacts(conditions, "", new int?(1000), new int?(0), "", new List<string>
-	{
-		"Id",
-		"FirstName",
-		"LastName",
-		"Type",
-		"CompanyId"
-	});
+    {
+        "Id",
+        "FirstName",
+        "LastName",
+        "Type",
+        "CompanyId"
+    });
             if (list3.Count > 0)
             {
                 ViewBag.Contact = 1;
@@ -85,11 +85,11 @@ namespace FerrumChromeDev.Controllers
                     obj.Type = current2.Type;
                 }
             }
-      
+
             return View(obj);
         }
 
-        public ActionResult AddContact( string CallerID)
+        public ActionResult AddContact(string CallerID = "1234")
         {
 
 
@@ -109,8 +109,8 @@ namespace FerrumChromeDev.Controllers
 
             return View(obj);
         }
-     
-public ActionResult SaveContact(ContactModel obj)
+
+        public ActionResult SaveContact(ContactModel obj)
         {
             _contactApi = new ContactApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
             Contact _contact = new Contact()
@@ -122,13 +122,13 @@ public ActionResult SaveContact(ContactModel obj)
                 Phone = obj.Phone,
                 Fax = obj.Fax,
                 Email = obj.Email,
-                Id=0,
+                Id = 0,
                 CompanyIdentifier = obj.companyIdentifier
             };
-       var result= _contactApi.AddOrUpdateContact(_contact);
+            var result = _contactApi.AddOrUpdateContact(_contact);
 
-            
-            return RedirectToAction("Index", new {callerID =  obj.Phone});
+
+            return RedirectToAction("Index", new { callerID = obj.Phone });
         }
 
 
@@ -143,7 +143,11 @@ public ActionResult SaveContact(ContactModel obj)
             //_activityApi = _activityApi.AddOrUpdateActivity(activityModel);
             return View();
         }
-       
+        public ActionResult AddActivity()
+        {
+            return View("AddActivity");
+
+        }
     }
 
     public class FerrumItModel

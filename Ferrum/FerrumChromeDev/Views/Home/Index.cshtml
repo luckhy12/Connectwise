@@ -88,10 +88,11 @@
             <br />
             <div class="row" style="background-color:#DFEFFF">
                 <div class="col-md-12">
-                    <div class="col-md-9" style="margin-top:6px;margin-bottom:6px">
-                        <input type="text" placeholder="Click here to add notes" class="form-control" />
+                    <div class="col-md-8    " style="margin-top:6px;margin-bottom:6px">
+                        @*<button type="button" class="btn btn-primary">Click here to add activity</button>*@
+                        @Html.ActionLink("Click here to add activity", "AddActivity", "Home", null, new { @class = "btn btn-primary" })
                     </div>
-                    <div class="col-md-3" style="margin-top:6px">
+                    <div class="col-md-4" style="margin-top:6px">
                         <button type="submit" class="btn btn-primary">SAVE</button>
                     </div>
                 </div>
