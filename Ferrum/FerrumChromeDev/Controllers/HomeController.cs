@@ -32,6 +32,9 @@ namespace FerrumChromeDev.Controllers
         }
         private static ContactApi _contactApi;
         private static CompanyApi _companyApi;
+        private static ActivityApi _activityApi;
+
+
         public ActionResult Index(string callerID)
         {
 
@@ -126,6 +129,19 @@ public ActionResult SaveContact(ContactModel obj)
 
             
             return RedirectToAction("Index", new {callerID =  obj.Phone});
+        }
+
+
+        public ActionResult SaveActivity()
+        {
+            Activity activityModel = new Activity();
+            activityModel.CompanyIdentifier = "";
+            activityModel.Subject = "";
+            activityModel.AssignTo = "";
+            activityModel.Id = 0;
+
+            //_activityApi = _activityApi.AddOrUpdateActivity(activityModel);
+            return View();
         }
        
     }
