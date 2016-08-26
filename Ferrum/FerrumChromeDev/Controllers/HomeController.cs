@@ -35,7 +35,7 @@ namespace FerrumChromeDev.Controllers
         private static ActivityApi _activityApi;
 
 
-        public ActionResult Index(string callerID="1234")
+        public ActionResult Index(string callerID)
         {
 
             if (callerID.StartsWith(" 1"))
