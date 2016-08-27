@@ -67,7 +67,7 @@ namespace FerrumChromeDev.Controllers
             new List<ContactModel>();
             ContactModel obj = new ContactModel();
             obj.Phone = callerID;
-            string conditions = "Phone = '" + callerID + "'";
+           string conditions = "Phone = '" + callerID + "'";
             List<ContactFindResult> list3 = _contactApi.FindContacts(conditions, "", new int?(1000), new int?(0), "", new List<string>
     {
         "Id",
