@@ -2,24 +2,40 @@
 @{
     ViewBag.Title = "AddActivity";
 }
-
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 @using (Html.BeginForm("SaveActivity", "Home"))
 {
-    @Html.HiddenFor(m=>m.Phone)
+    @Html.HiddenFor(m => m.Phone)
     <div class="container">
         <div class="row">
             <div class="form-horizontal">
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="selectCustomer">Company</label>
                     <div class="col-md-5">
-                        @Html.DropDownListFor(r => r.CompanyIdentifier, (IEnumerable<SelectListItem>)ViewBag.CompaniesList, "Select Company", new { @id = "comapanyDD", @class = "form-control" })
-                        @*<select class="form-control">
-                                <option>A</option>
-                            <option>B</option>
-                            <option>C/option>
-                            <option>D</option>
-                            </select>*@
+                        @Html.DropDownListFor(r => r.CompanyIdentifier, (IEnumerable<SelectListItem>)ViewBag.CompaniesList, "Select Company", new { id = "comapanyDD", @class = "form-control" })
 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="selectCustomer">Contact</label>
+                    <div class="col-md-5">
+                      
+                        @Html.DropDownListFor(r=>r.ContactId,(IEnumerable<SelectListItem>)ViewBag.ContactLst,new { id = "contactDD", @class="form-control" })
+
+
+                          @*<select id="contactDD" class="form-control">
+                        </select>*@
+                        
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="selectCustomer">Activity Type</label>
+                    <div class="col-md-5">
+                        @Html.DropDownListFor(r => r.ActivityType, (IEnumerable<SelectListItem>)ViewBag.ActivityList, "Select Type", new { @id = "activityTypeDD", @class = "form-control" })
 
                     </div>
                 </div>
@@ -27,26 +43,19 @@
                     <label class="col-md-4 control-label">Member</label>
                     <div class="col-md-5">
                         @Html.DropDownListFor(r => r.AssignTo, (IEnumerable<SelectListItem>)ViewBag.MembersList, "Select Member", new { @id = "comapanyDD", @class = "form-control" })
-                        @*<select class="form-control">
-                                <option>A</option>
-                                <option>B</option>
-                                <option>C</option>
-                                <option>D</option>
-                            </select>*@
+
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-4 control-label">Subject</label>
                     <div class="col-md-8">
                         @Html.TextBoxFor(m => m.Subject, new { @class = "form-control input-lg" })
-                        @*<input type="text" class="form-control input-lg"/>*@
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-4 control-label">Notes</label>
                     <div class="col-md-8">
                         @Html.TextAreaFor(a => a.Notes, new { @class = "form-control" })
-                        @*<textarea class="form-control"></textarea>*@
                     </div>
                 </div>
                 <div class="form-group text-center">
@@ -59,3 +68,28 @@
     </div>
 
 }
+
+<script>
+    $("#comapanyDD").change(function () {
+       // alert("sf");
+        var comp = $("#comapanyDD").val();
+        $.ajax({
+            url: '@Url.Action("GetContactsDropDown", "Home")',
+        data: { CompanyIdentifier: comp },
+        success: function (data) {
+            var items = '<option>Select Contact</option>';
+            $.each(data, function (i, Contactlst) {
+                items += "<option value='" + Contactlst.Value + "'>" +
+                          Contactlst.Text + "</option>";
+            });
+            $('#contactDD').html(items);
+        }
+
+    });
+    });
+
+
+
+</script>
+
+

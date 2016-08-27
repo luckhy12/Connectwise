@@ -35,7 +35,7 @@
                                       <label style="color:lightgray">Callinize-Support</label>
                                   </div>
                                   <div class="row">
-                                      <label style="color:darkblue">@Model.Phone</label>
+                                      <label id="phoneNoLabel" style="color:darkblue">@Model.Phone</label>
                                   </div>
                                   <div class="row">
                                       <button type="button" class="btn btn-primary">Lead</button>
@@ -80,7 +80,8 @@
                       <br />
                       <div class="row" style="background-color:#DFEFFF">
                           <div class="col-md-12 col-xs-12 text-center"style="margin-top:6px;margin-bottom:6px">
-                                  @Html.ActionLink("Click here to add activity", "AddActivity", "Home", null, new { @class = "btn btn-primary" })
+    <a onclick="AddActivity()" href="javascript:void(0)" class="btn btn-primary">Click here to add activity</a>
+    @*@Html.ActionLink("Click here to add activity", "AddActivity", "Home", null, new { @class = "btn btn-primary" })*@
                           </div>
                       </div>
                   </div>
@@ -132,7 +133,7 @@
 
 <script>
     function AddActivity() {
-       // debugger;
+        debugger;
         var phone = $("#phoneNoLabel").text();
       //  alert(phone);
         window.location.href = "/Home/AddActivity?Phone=" + phone;

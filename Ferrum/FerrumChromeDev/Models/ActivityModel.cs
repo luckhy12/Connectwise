@@ -12,5 +12,8 @@ namespace FerrumChromeDev.Models
         public string AssignTo { get; set; }
         public string Subject { get; set; }
         public string Phone { get; set; }
+
+        public int ContactId { get; set; }
+        public string ActivityType { get; set; }
     }
 }
