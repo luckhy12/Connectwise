@@ -12,5 +12,7 @@ namespace FerrumChromeDev.Models
         public string AssignTo { get; set; }
         public string Subject { get; set; }
         public string Phone { get; set; }
+        public string ActivityTypeDescription { get; set; }
+        public DateTime? DueDate { get; set; }
     }
 }

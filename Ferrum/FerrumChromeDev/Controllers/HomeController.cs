@@ -37,9 +37,8 @@ namespace FerrumChromeDev.Controllers
         private static MemberApi _memberApi;
 
 
-        public ActionResult Index(string callerID)
+        public ActionResult Index(string callerID="1234")
         {
-
 
             if (callerID.StartsWith(" 1"))
             {
@@ -67,7 +66,7 @@ namespace FerrumChromeDev.Controllers
             new List<ContactModel>();
             ContactModel obj = new ContactModel();
             obj.Phone = callerID;
-           string conditions = "Phone = '" + callerID + "'";
+            string conditions = "Phone = '" + callerID + "'";
             List<ContactFindResult> list3 = _contactApi.FindContacts(conditions, "", new int?(1000), new int?(0), "", new List<string>
     {
         "Id",
@@ -88,7 +87,28 @@ namespace FerrumChromeDev.Controllers
                     obj.Type = current2.Type;
                 }
             }
-
+            var phoneno = "2242307730";
+            conditions = "PhoneNumber= '" + phoneno + "'";
+            _activityApi = new ActivityApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
+            List<ActivityFindResult> activitylist = _activityApi.FindActivities(conditions, "", new int?(1000), new int?(0), new List<string>
+            { "Id",
+        "Subject",
+        "Notes",
+        "AssignToResource",
+        "DueDate",
+        "ActivityTypeDescription"
+            });
+            foreach (ActivityFindResult currentactivity in activitylist)
+            {
+                obj.ActivityList.Add(new ActivityModel
+                {
+                    ActivityTypeDescription = currentactivity.ActivityTypeDescription,
+                    AssignTo = currentactivity.AssignToResource,
+                    Notes = currentactivity.Notes,
+                    DueDate = currentactivity.DueDate,
+                    Subject = currentactivity.Subject
+                });
+            }
             return View(obj);
         }
 
@@ -130,7 +150,7 @@ namespace FerrumChromeDev.Controllers
             };
             var result = _contactApi.AddOrUpdateContact(_contact);
 
-            
+
 
             return RedirectToAction("Index", new { callerID = obj.Phone });
         }
@@ -146,7 +166,7 @@ namespace FerrumChromeDev.Controllers
             activityModel.Notes = model.Notes;
             activityModel.Id = 0;
             var result = _activityApi.AddOrUpdateActivity(activityModel);
-          //  return RedirectToAction("Index");
+            //  return RedirectToAction("Index");
             return RedirectToAction("Index", new { callerID = model.Phone });
         }
         public ActionResult AddActivity(string Phone)
@@ -163,11 +183,11 @@ namespace FerrumChromeDev.Controllers
             });
             ViewBag.CompaniesList = new SelectList(list2.AsEnumerable(), "CompanyIdentifier", "CompanyName");
 
-            
+
 
             _memberApi = new MemberApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
 
-            List<MemberFindResult> MembersList = _memberApi.FindMembers("", "FirstName asc",new int?(1000),new int?(0),new List<string>
+            List<MemberFindResult> MembersList = _memberApi.FindMembers("", "FirstName asc", new int?(1000), new int?(0), new List<string>
             {
                 "Id",
                 "MemberIdentifier",
@@ -177,7 +197,7 @@ namespace FerrumChromeDev.Controllers
 
             ActivityModel model = new ActivityModel();
             model.Phone = Phone;
-            return View("AddActivity",model);
+            return View("AddActivity", model);
 
         }
 

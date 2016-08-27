@@ -66,23 +66,23 @@
                               </div>
                               <div class="col-md-8 col-xs-8">
                                   <div class="divs">
-                                      <div class="row">
-                                          <label style="color:lightgray">Called by Julie 2 day ago</label>
-                                          <label>- Auto Created by Callinze</label>
-                                      </div>
-                                      <div class="row">
-                                          <label style="color:lightgray">Called by Julie 3 day ago</label>
-                                          <label>- Auto Created by Callinze</label>
-                                      </div>
-                                      <div class="row">
-                                          <label style="color:lightgray">Called by Julie 4 day ago</label>
-                                          <label>- Auto Created by Callinze</label>
-                                      </div>
-                                      <div class="row">
-                                          <label style="color:lightgray">Called by Julie 5 day ago</label>
-                                          <label>- Auto Created by Callinze</label>
-                                      </div>
-                                  </div>
+                                      @if (Model.ActivityList.Count > 0 || Model.ActivityList!=null)
+                                      {
+                                        foreach (var activity in @Model.ActivityList)
+                                        {
+                                            <div class="row">
+                                                <label style="color:lightgray">@activity.ActivityTypeDescription by @activity.AssignTo @activity.DueDate</label>
+                                                <label>- @activity.Notes</label>
+                                            </div>
+                                        }
+                                      }
+                                      else
+                                      {
+                                        <div class="row">
+                                            <label style="color:lightgray">No Activity Added</label>
+                                            </div>
+                                       }
+                                        </div>
                                   </div>
                               </div>
                               <div class="pull-right col-md-2 col-xs-2">
