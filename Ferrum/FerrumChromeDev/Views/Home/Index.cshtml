@@ -62,18 +62,31 @@
                           <hr style="border-top: dotted 1px;" />
                           <div class="col-md-12">
                               <div class="col-md-1 col-xs-1">
-                                  <span style="color:darkgray"><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></span>
+                                  <a id="prev" style="color:darkgray"><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a>
                               </div>
                               <div class="col-md-8 col-xs-8">
-                                  <div class="row">
-                                      <label style="color:lightgray">Called by Julie 2 day ago</label>
-                                  </div>
-                                  <div class="row">
-                                      <label>- Auto Created by Callinze</label>
+                                  <div class="divs">
+                                      @if (Model.ActivityList.Count > 0 || Model.ActivityList!=null)
+                                      {
+                                        foreach (var activity in @Model.ActivityList)
+                                        {
+                                            <div class="row">
+                                                <label style="color:lightgray">@activity.ActivityTypeDescription by @activity.AssignTo @activity.DueDate</label>
+                                                <label>- @activity.Notes</label>
+                                            </div>
+                                        }
+                                      }
+                                      else
+                                      {
+                                        <div class="row">
+                                            <label style="color:lightgray">No Activity Added</label>
+                                            </div>
+                                       }
+                                        </div>
                                   </div>
                               </div>
                               <div class="pull-right col-md-2 col-xs-2">
-                                  <span style="color:darkblue"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></span>
+                                  <a id="next" style="color:darkblue"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
                               </div>
                           </div>
                       </div>
@@ -85,7 +98,6 @@
                           </div>
                       </div>
                   </div>
-              </div>
           }
           else
           {
@@ -125,19 +137,29 @@
             </div>
           }
 
-  
-
-
-
-    </div>
-
 <script>
-    function AddActivity() {
-        debugger;
-        var phone = $("#phoneNoLabel").text();
-      //  alert(phone);
-        window.location.href = "/Home/AddActivity?Phone=" + phone;
+    $(document).ready(function () {
+        $(".divs div").each(function (e) {
+            if (e != 0)
+                $(this).hide();
+        });
 
+        $("#next").click(function () {
+            if ($(".divs div:visible").next().length != 0)
+                $(".divs div:visible").next().show().prev().hide();
+            return false;
+        });
+
+        $("#prev").click(function () {
+            if ($(".divs div:visible").prev().length != 0)
+                $(".divs div:visible").prev().show().next().hide();
+            return false;
+        });
+    });
+
+    function AddActivity() {
+        var phone = $("#phoneNoLabel").text();
+        window.location.href = "/Home/AddActivity?Phone=" + phone;
     }
 </script>
 

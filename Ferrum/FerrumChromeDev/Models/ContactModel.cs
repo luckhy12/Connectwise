@@ -7,6 +7,11 @@ namespace FerrumChromeDev.Models
 {
     public class ContactModel
     {
+
+        public ContactModel()
+        {
+            ActivityList = new List<ActivityModel>();
+        }
         public int? ContactId
         {
             get;
@@ -38,5 +43,6 @@ namespace FerrumChromeDev.Models
             get;
             set;
         }
+        public List<ActivityModel> ActivityList { get; set; }
     }
 }

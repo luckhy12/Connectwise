@@ -15,5 +15,7 @@ namespace FerrumChromeDev.Models
 
         public int ContactId { get; set; }
         public string ActivityType { get; set; }
+        public string ActivityTypeDescription { get; set; }
+        public DateTime? DueDate { get; set; }
     }
 }
