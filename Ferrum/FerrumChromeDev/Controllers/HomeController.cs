@@ -73,7 +73,8 @@ namespace FerrumChromeDev.Controllers
         "FirstName",
         "LastName",
         "Type",
-        "CompanyId"
+        "CompanyId",
+        "CompanyName"
     });
             if (list3.Count > 0)
             {
@@ -160,8 +161,6 @@ namespace FerrumChromeDev.Controllers
         {
             ContactInformation contactModel = new ContactInformation();
             contactModel.ContactId = model.ContactId;
-
-
             _activityApi = new ActivityApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
             Activity activityModel = new Activity();
             activityModel.CompanyIdentifier = model.CompanyIdentifier;
@@ -176,25 +175,21 @@ namespace FerrumChromeDev.Controllers
 
 
             var result = _activityApi.AddOrUpdateActivity(activityModel);
-            //  return RedirectToAction("Index");
             return RedirectToAction("Index", new { callerID = model.Phone });
         }
-        public ActionResult AddActivity(string Phone)
+        public ActionResult AddActivity(string Phone,int ID)
         {
             _companyApi = new CompanyApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
             _activityApi = new ActivityApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
+            
+           string conditions = "ID="+ID;
 
-
-            List<CompanyFindResult> list2 = _companyApi.FindCompanies("", "CompanyName asc", new int?(100000), new int?(0), new List<string>
+            List<CompanyFindResult> list2 = _companyApi.FindCompanies(conditions, "CompanyName asc", new int?(100000), new int?(0), new List<string>
             {
                 "Id",
                 "CompanyName",
                 "CompanyIdentifier"
             });
-            ViewBag.CompaniesList = new SelectList(list2.AsEnumerable(), "CompanyIdentifier", "CompanyName");
-
-
-
             _memberApi = new MemberApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
 
             List<MemberFindResult> MembersList = _memberApi.FindMembers("", "FirstName asc", new int?(1000), new int?(0), new List<string>
@@ -220,15 +215,13 @@ namespace FerrumChromeDev.Controllers
             {
                 a.ActivityTypeDescription
             }).Distinct().ToList();
-           // ActivityTypeList = ActivityTypeList.Distinct().ToList();
+           
             ViewBag.ActivityList = new SelectList(query.AsEnumerable(), "ActivityTypeDescription", "ActivityTypeDescription");
-
-
-            ViewBag.ContactLst = new SelectList(new List<ContactFindResult>(), "", "");
-
 
             ActivityModel model = new ActivityModel();
             model.Phone = Phone;
+            model.CompanyIdentifier = list2.FirstOrDefault().CompanyIdentifier;
+            model.CompanyName = list2.FirstOrDefault().CompanyName;
             return View("AddActivity", model);
 
         }

@@ -8,6 +8,7 @@ namespace FerrumChromeDev.Models
     public class ActivityModel
     {
         public string CompanyIdentifier { get; set; }
+        public string CompanyName { get; set; }
         public string Notes { get; set; }
         public string AssignTo { get; set; }
         public string Subject { get; set; }

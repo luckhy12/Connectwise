@@ -6,13 +6,15 @@
 @using (Html.BeginForm("SaveActivity", "Home"))
 {
     @Html.HiddenFor(m => m.Phone)
+    @Html.HiddenFor(m => m.CompanyIdentifier)
     <div class="container">
         <div class="row">
             <div class="form-horizontal">
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="selectCustomer">Company</label>
                     <div class="col-md-5">
-                        @Html.DropDownListFor(r => r.CompanyIdentifier, (IEnumerable<SelectListItem>)ViewBag.CompaniesList, "Select Company", new { id = "comapanyDD", @class = "form-control" })
+                        @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control input-lg",@readonly=true})
+                        @*@Html.DropDownListFor(r => r.CompanyIdentifier, (IEnumerable<SelectListItem>)ViewBag.CompaniesList, "Select Company", new { id = "comapanyDD", @class = "form-control" })*@
 
                     </div>
                 </div>
@@ -20,14 +22,8 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="selectCustomer">Contact</label>
                     <div class="col-md-5">
-                      
-                        @Html.DropDownListFor(r=>r.ContactId,(IEnumerable<SelectListItem>)ViewBag.ContactLst,new { id = "contactDD", @class="form-control" })
-
-
-                          @*<select id="contactDD" class="form-control">
-                        </select>*@
-                        
-
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control input-lg",@readonly=true }) 
+                        @*@Html.DropDownListFor(r=>r.ContactId,(IEnumerable<SelectListItem>)ViewBag.ContactLst,new { id = "contactDD", @class="form-control" })*@
                     </div>
                 </div>
 
