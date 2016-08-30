@@ -4,10 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ConnectWiseSDK;
+using FerrumChromeDev.Models;
+
 namespace FerrumChromeDev.Controllers
 {
     public class ServiceTicketController : Controller
     {
+        private static ServiceTicketApi _serviceTicketApi;
         // GET: ServiceTicket
         public ActionResult Index()
         {
@@ -37,6 +40,34 @@ namespace FerrumChromeDev.Controllers
 
             return View();
 
+        }
+
+        [HttpPost]
+        public ActionResult AddNewServiceTicket(ServiceTicketModel model)
+        {
+
+            List<TicketNote> note = new List<TicketNote>();
+            TicketNote noteModel = new TicketNote();
+            noteModel.ContactId = Convert.ToInt32(model.ContactId);
+            noteModel.DateCreated = System.DateTime.Now;
+            noteModel.NoteText = model.Notes;
+            note.Add(noteModel);
+
+            ServiceTicket serviceTicket = new ServiceTicket();
+            serviceTicket.CompanyId= model.CompanyId;
+            serviceTicket.Summary = model.tktSummary;
+            serviceTicket.DetailDescription = model.probDesc;
+            serviceTicket.StatusName = "";
+            serviceTicket.ServiceType = "";
+            serviceTicket.ServiceSubType = "";
+            serviceTicket.Priority = model.PriorityTxt;
+            serviceTicket.ContactId = model.ContactId;
+            serviceTicket.Id = 0;
+            //serviceTicket.boar
+            serviceTicket.DetailNotes = note;
+            _serviceTicketApi = new ServiceTicketApi("https://api-eu.myconnectwise.net", "novaram", "callcenter", "Test123!", "NovaramCred");
+            var result = _serviceTicketApi.AddOrUpdateServiceTicketViaCompanyIdentifier(model.CompanyIdentifier, serviceTicket);
+            return View();
         }
     }
 }
