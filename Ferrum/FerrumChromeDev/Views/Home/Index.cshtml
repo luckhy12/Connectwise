@@ -96,7 +96,7 @@
             <a onclick="AddActivity()" href="javascript:void(0)" class="btn btn-primary">Click here to add activity</a>
         </div>
         <div class="row text-center" style="margin-top:6px;margin-bottom:6px">
-            <a href="javascript:void(0)" class="btn btn-primary" style="width:180px">Create New Ticket</a>
+            <a href="javascript:void(0)" onclick="CreateTicket('@Model.Phone')" class="btn btn-primary" style="width:180px">Click here to create ticket</a>
         </div>
     </div>
 </div>
@@ -164,6 +164,20 @@
         var phone = $("#phoneNoLabel").text();
         var ID = '@Model.CompanyID';
         window.location.href = "/Home/AddActivity?Phone=" + phone+"&ID="+ID;
+    }
+    function CreateTicket(PhoneNo)
+    {
+        $.ajax(
+            {
+                url:'@Url.Action("CheckTicket", "ServiceTicket")',
+                data: { Mobile: PhoneNo },
+                method: "POST",
+                type: "JSON",
+                success:function()
+                {
+
+                }
+            });
     }
 </script>
 
