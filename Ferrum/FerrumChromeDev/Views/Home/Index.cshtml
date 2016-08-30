@@ -138,7 +138,42 @@
     </div>
 </div>
           }
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ticket not exist </h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to create a new service ticket </p>
+            </div>
+            <div class="modal-footer">
+                <a href="@Url.Action("AddNewServiceTicket", "ServiceTicket")" class="btn btn-default">Create</a>
+                
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myNewModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"> View Ticket</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to view service ticket or add new </p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default">Create New</a>
 
+                <button type="button" class="btn btn-default" data-dismiss="modal">View</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function () {
         $(".divs div").each(function (e) {
@@ -160,7 +195,7 @@
     });
 
     function AddActivity() {
-        debugger;
+       
         var phone = $("#phoneNoLabel").text();
         var ID = '@Model.CompanyID';
         window.location.href = "/Home/AddActivity?Phone=" + phone+"&ID="+ID;
@@ -175,7 +210,14 @@
                 type: "JSON",
                 success:function(data)
                 {
-
+                    if(data.length==0)
+                    {
+                        $("#myModal").modal('show');
+                    }
+                    else {
+                        $("#myNewModal").modal('show');
+                    }
+                    
                 }
             });
     }

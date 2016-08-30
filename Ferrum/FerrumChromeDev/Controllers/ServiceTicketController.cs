@@ -27,9 +27,9 @@ namespace FerrumChromeDev.Controllers
         "ContactName",
         "AddressLine1",
         "City"
-            });   
-            
-            return Json(0);
+            });
+
+           return Json(ServiceTicketlist);
         }
         public ActionResult AddNewServiceTicket()
         {
