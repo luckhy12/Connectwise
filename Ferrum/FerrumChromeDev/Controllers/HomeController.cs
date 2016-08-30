@@ -273,8 +273,13 @@ namespace FerrumChromeDev.Controllers
 
         public ActionResult Test()
         {
-            _memberApi = new MemberApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
-            List<MemberFindResult> list2 = _memberApi.FindMembers("", "FirstName asc", new int?(1000), new int?(0), new List<string>());
+            // _memberApi = new MemberApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
+            // List<MemberFindResult> list2 = _memberApi.FindMembers("", "FirstName asc", new int?(1000), new int?(0), new List<string>());
+            ServiceTicketApi _serviceTicketApi;
+            _serviceTicketApi = new ServiceTicketApi("https://api-eu.myconnectwise.net", "novaram", "callcenter", "Test123!", "NovaramCred");
+            var result = _serviceTicketApi.FindServiceTickets("","",new int?(1000),new int?(0),false ,new List<string>());
+
+
             return View();
         }
 
@@ -317,6 +322,22 @@ namespace FerrumChromeDev.Controllers
             return query.FirstOrDefault().Id;
         }
 
+        public CompanyObj GetCompanyDetailsContactWise(string Contact)
+        {
+
+            string conditions = "PhoneNumber = '" + Contact + "'";            
+            _companyApi = new CompanyApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
+            List<CompanyFindResult> list2 = _companyApi.FindCompanies(conditions, "Id asc", new int?(100000), new int?(0), new List<string>
+            {
+                "Id",
+                "CompanyIdentifier"
+            });
+            CompanyObj obj = new CompanyObj();
+            obj.CompanyId = list2.FirstOrDefault().Id;
+            obj.CompanyIdentifier = list2.FirstOrDefault().CompanyIdentifier;
+            return obj;
+        }
+
 
     }
 
@@ -324,6 +345,12 @@ namespace FerrumChromeDev.Controllers
     {
         public string PhoneNo { get; set; }
         public string PhoneExt { get; set; }
+    }
+
+    public class CompanyObj
+    {
+        public int? CompanyId { get; set; }
+        public string CompanyIdentifier { get; set; }
     }
 
 
