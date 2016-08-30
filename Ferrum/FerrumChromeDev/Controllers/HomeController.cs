@@ -322,14 +322,17 @@ namespace FerrumChromeDev.Controllers
             return query.FirstOrDefault().Id;
         }
 
-        public CompanyObj GetCompanyDetailsContactWise(string Contact)
+        public CompanyObj GetCompanyDetailsViaId(int CompanyId)
         {
 
-            string conditions = "PhoneNumber = '" + Contact + "'";            
+            //string conditions = "PhoneNumber = '" + Contact + "'";            
             _companyApi = new CompanyApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
-            List<CompanyFindResult> list2 = _companyApi.FindCompanies(conditions, "Id asc", new int?(100000), new int?(0), new List<string>
+            string conditions = "ID=" + CompanyId;
+
+            List<CompanyFindResult> list2 = _companyApi.FindCompanies(conditions, "CompanyName asc", new int?(100000), new int?(0), new List<string>
             {
                 "Id",
+                "CompanyName",
                 "CompanyIdentifier"
             });
             CompanyObj obj = new CompanyObj();
