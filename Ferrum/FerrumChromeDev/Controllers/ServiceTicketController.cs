@@ -54,7 +54,8 @@ namespace FerrumChromeDev.Controllers
             note.Add(noteModel);
 
             ServiceTicket serviceTicket = new ServiceTicket();
-            serviceTicket.CompanyId= model.CompanyId;
+            //serviceTicket.CompanyId= model.CompanyId;
+            serviceTicket.CompanyIdentifier = 
             serviceTicket.Summary = model.tktSummary;
             serviceTicket.DetailDescription = model.probDesc;
             serviceTicket.StatusName = "";
