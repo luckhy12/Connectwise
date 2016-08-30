@@ -88,10 +88,10 @@ namespace FerrumChromeDev.Controllers
                     obj.Type = current2.Type;
                 }
             }
-            var phoneno = "2242307730";
-            conditions = "PhoneNumber= '" + phoneno + "'";
+           // var phoneno = "2242307730";
+            conditions = "PhoneNumber= '" + callerID + "'";
             _activityApi = new ActivityApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
-            List<ActivityFindResult> activitylist = _activityApi.FindActivities(conditions, "", new int?(1000), new int?(0), new List<string>
+            List<ActivityFindResult> activitylist = _activityApi.FindActivities(conditions, "", new int?(100000), new int?(0), new List<string>
             { "Id",
         "Subject",
         "Notes",
@@ -170,7 +170,7 @@ namespace FerrumChromeDev.Controllers
             activityModel.AssignTo = model.AssignTo;
             activityModel.Notes = model.Notes;
             activityModel.Id = 0;
-            
+
 
 
 
@@ -220,6 +220,7 @@ namespace FerrumChromeDev.Controllers
 
             ActivityModel model = new ActivityModel();
             model.Phone = Phone;
+            model.ContactId = GetContactsId(Phone);
             model.CompanyIdentifier = list2.FirstOrDefault().CompanyIdentifier;
             model.CompanyName = list2.FirstOrDefault().CompanyName;
             return View("AddActivity", model);
@@ -276,6 +277,47 @@ namespace FerrumChromeDev.Controllers
             List<MemberFindResult> list2 = _memberApi.FindMembers("", "FirstName asc", new int?(1000), new int?(0), new List<string>());
             return View();
         }
+
+        public int GetContactsId(string Contact)
+        {
+
+            string conditions = "Phone = '" + Contact + "'";
+
+            _contactApi = new ContactApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
+            //_companyApi = new CompanyApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
+
+
+            //List<CompanyFindResult> list2 = _companyApi.FindCompanies(companyCondition, "Id asc", new int?(100000), new int?(0), new List<string>
+            //{
+            //    "Id",
+            //    "CompanyName",
+            //    "CompanyIdentifier"
+            //});
+            //int companyId = list2.FirstOrDefault().Id;
+
+            //string conditions = "CompanyId = " + companyId;
+
+
+            List<ContactFindResult> Contactlst = _contactApi.FindContacts(conditions, "", new int?(1000), new int?(0), "", new List<string>
+    {
+        "Id",
+        "FirstName",
+        "LastName",
+        "Type",
+        "CompanyId"
+    });
+
+            var query = Contactlst.Select(a => new
+            {
+                Id = a.Id,
+                Name = a.FirstName + " " + a.LastName
+            }).ToList();
+
+
+            return query.FirstOrDefault().Id;
+        }
+
+
     }
 
     public class FerrumItModel
@@ -283,5 +325,8 @@ namespace FerrumChromeDev.Controllers
         public string PhoneNo { get; set; }
         public string PhoneExt { get; set; }
     }
+
+
+    
 
 }
