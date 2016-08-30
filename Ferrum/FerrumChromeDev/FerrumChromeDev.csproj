@@ -295,10 +295,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\AddContact.cshtml" />
     <Content Include="Views\Home\AddActivity.cshtml" />
+    <Content Include="Views\ServiceTicket\AddNewServiceTicket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ServiceTicket\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

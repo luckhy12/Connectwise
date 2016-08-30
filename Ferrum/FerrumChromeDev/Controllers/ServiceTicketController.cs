@@ -16,13 +16,27 @@ namespace FerrumChromeDev.Controllers
         public ActionResult CheckTicket(string Mobile)
         {
            HomeController ctlObj= new HomeController();
-            
+         int ContactID=   ctlObj.GetContactsId(Mobile);
 
-            string conditions = "CompanyId= '" + 23232 + "'";
+            string conditions = "ContactId= " + ContactID ;
                  ServiceTicketApi   _ServiceTicketApi      = new ServiceTicketApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
-           List<TicketFindResult> ServiceTicketlist = _ServiceTicketApi.FindServiceTickets(conditions,"",null,null,true,new List<string>);    //conditions, "", new int?(1000), new int?(0), new List<string>
+           List<TicketFindResult> ServiceTicketlist = _ServiceTicketApi.FindServiceTickets(conditions,"",null,null,true,new List<string>  {
+               "Id",
+        "CompanyName",
+        "CompanyId",
+        "ContactName",
+        "AddressLine1",
+        "City"
+            });   
             
             return Json(0);
+        }
+        public ActionResult AddNewServiceTicket()
+        {
+
+
+            return View();
+
         }
     }
 }
