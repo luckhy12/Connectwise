@@ -6,10 +6,10 @@
 <h3>Quick Ticket - New Service Ticket Entry</h3>
 @using(Html.BeginForm())
 { 
-   
+   @Html.HiddenFor(m=>m.CompanyId,Model.CompanyId)
     <div class="form-group">
         <label for="exampleInputPassword1">Contact :</label>
-        @Html.TextBoxFor(m => m.contactno, new { @class = "form-control" ,@disabled="true" })
+        @Html.TextBoxFor(m => m.contactno, new {value=Model.contactno,@class = "form-control" ,@disabled="true" })
        
     </div>
     <div class="form-group">

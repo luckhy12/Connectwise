@@ -34,10 +34,11 @@ namespace FerrumChromeDev.Controllers
 
            return Json(ServiceTicketlist);
         }
-        public ActionResult AddNewServiceTicket(string Mobile)
+        public ActionResult AddNewServiceTicket(int CompanyID, string mobile)
         {
             ServiceTicketModel model = new ServiceTicketModel();
-            model.contactno = Mobile;
+            model.contactno = mobile;
+            model.CompanyId = CompanyID;
 
             return View(model);
 
@@ -47,23 +48,26 @@ namespace FerrumChromeDev.Controllers
         public ActionResult AddNewServiceTicket(ServiceTicketModel model)
         {
 
-          
+            HomeController ctlObj = new HomeController();
+            int ContactID = ctlObj.GetContactsId(model.contactno);
+
+        //    var  companydetail =ctlObj.GetCompanyDetailsContactWise(model.CompanyId);
 
             ServiceTicket serviceTicket = new ServiceTicket();
             //serviceTicket.CompanyId= model.CompanyId;
-            serviceTicket.CompanyIdentifier = 
+            serviceTicket.CompanyIdentifier = companydetail.CompanyIdentifier;
             serviceTicket.Summary = model.tktSummary;
             serviceTicket.DetailDescription = model.probDesc;
             serviceTicket.StatusName = "";
             serviceTicket.ServiceType = "";
             serviceTicket.ServiceSubType = "";
             serviceTicket.Priority = model.PriorityTxt;
-            serviceTicket.ContactId = model.ContactId;
+            serviceTicket.ContactId = ContactID;
             serviceTicket.Id = 0;
             //serviceTicket.boar
           //  serviceTicket.DetailNotes = note;
             _serviceTicketApi = new ServiceTicketApi("https://api-eu.myconnectwise.net", "novaram", "callcenter", "Test123!", "NovaramCred");
-            var result = _serviceTicketApi.AddOrUpdateServiceTicketViaCompanyIdentifier(model.CompanyIdentifier, serviceTicket);
+            var result = _serviceTicketApi.AddOrUpdateServiceTicketViaCompanyIdentifier(companydetail.CompanyIdentifier, serviceTicket);
 
           
             //List<TicketNote> note = new List<TicketNote>();
