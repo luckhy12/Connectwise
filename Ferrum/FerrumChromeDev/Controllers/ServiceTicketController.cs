@@ -34,11 +34,12 @@ namespace FerrumChromeDev.Controllers
 
            return Json(ServiceTicketlist);
         }
-        public ActionResult AddNewServiceTicket()
+        public ActionResult AddNewServiceTicket(string Mobile)
         {
+            ServiceTicketModel model = new ServiceTicketModel();
+            model.contactno = Mobile;
 
-
-            return View();
+            return View(model);
 
         }
 
@@ -46,12 +47,7 @@ namespace FerrumChromeDev.Controllers
         public ActionResult AddNewServiceTicket(ServiceTicketModel model)
         {
 
-            List<TicketNote> note = new List<TicketNote>();
-            TicketNote noteModel = new TicketNote();
-            noteModel.ContactId = Convert.ToInt32(model.ContactId);
-            noteModel.DateCreated = System.DateTime.Now;
-            noteModel.NoteText = model.Notes;
-            note.Add(noteModel);
+          
 
             ServiceTicket serviceTicket = new ServiceTicket();
             serviceTicket.CompanyId= model.CompanyId;
@@ -64,9 +60,21 @@ namespace FerrumChromeDev.Controllers
             serviceTicket.ContactId = model.ContactId;
             serviceTicket.Id = 0;
             //serviceTicket.boar
-            serviceTicket.DetailNotes = note;
+          //  serviceTicket.DetailNotes = note;
             _serviceTicketApi = new ServiceTicketApi("https://api-eu.myconnectwise.net", "novaram", "callcenter", "Test123!", "NovaramCred");
             var result = _serviceTicketApi.AddOrUpdateServiceTicketViaCompanyIdentifier(model.CompanyIdentifier, serviceTicket);
+
+          
+            //List<TicketNote> note = new List<TicketNote>();
+            //TicketNote noteModel = new TicketNote();
+            //noteModel.ContactId = Convert.ToInt32(model.ContactId);
+            //noteModel.DateCreated = System.DateTime.Now;
+            //noteModel.NoteText = model.Notes;
+            //noteModel.Id = 0;
+           
+            //note.Add(noteModel);
+            
+            
             return View();
         }
     }

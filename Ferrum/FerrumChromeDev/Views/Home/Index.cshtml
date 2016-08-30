@@ -149,7 +149,7 @@
                 <p>Do you want to create a new service ticket </p>
             </div>
             <div class="modal-footer">
-                <a href="@Url.Action("AddNewServiceTicket", "ServiceTicket")" class="btn btn-default">Create</a>
+                <a href="@Url.Action("AddNewServiceTicket", "ServiceTicket", new { Mobile=Model.Phone })" class="btn btn-default">Create</a>
                 
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
@@ -167,7 +167,8 @@
                 <p>Do you want to view service ticket or add new </p>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-default">Create New</a>
+                <a href="@Url.Action("AddNewServiceTicket", "ServiceTicket", new { Mobile=Model.Phone })" class="btn btn-default">Create</a>
+
 
                 <button type="button" class="btn btn-default" data-dismiss="modal">View</button>
             </div>
