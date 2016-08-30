@@ -15,5 +15,6 @@ namespace FerrumChromeDev.Models
 
         public string CompanyIdentifier { get; set; }
         public string Notes { get; set; }
+        public string contactno { get; set; }
     }
 }
