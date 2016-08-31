@@ -7,17 +7,14 @@
 @using(Html.BeginForm())
 { 
    @Html.HiddenFor(m=>m.CompanyId,Model.CompanyId)
-    <div class="form-group">
-        <label for="exampleInputPassword1">Contact :</label>
-        @Html.TextBoxFor(m => m.contactno, new {value=Model.contactno,@class = "form-control" ,@disabled="true" })
-       
-    </div>
-    <div class="form-group">
+    @Html.HiddenFor(M=>M.contactno,Model.contactno)
+  
+    @*<div class="form-group">
         <label for="exampleInputPassword1">Service Board :</label>
         <select class="form-control">
             <option>Default select</option>
         </select>
-    </div>
+    </div>*@
     <div class="form-group">
         <label for="exampleInputPassword1">Summary :</label>
         @Html.TextBoxFor(m => m.tktSummary, new { @class = "form-control" ,placeholder="{Summary Description}" })

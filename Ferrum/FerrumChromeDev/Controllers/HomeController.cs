@@ -37,7 +37,7 @@ namespace FerrumChromeDev.Controllers
         private static MemberApi _memberApi;
 
 
-        public ActionResult Index(string callerID="1234")
+        public ActionResult Index(string callerID="2242307730")
         {
 
             if (callerID.StartsWith(" 1"))
@@ -325,7 +325,7 @@ namespace FerrumChromeDev.Controllers
         public CompanyObj GetCompanyDetailsViaId(int CompanyId)
         {
 
-            //string conditions = "PhoneNumber = '" + Contact + "'";            
+          //  string conditions = "PhoneNumber = '" + 2242307730 + "'";            
             _companyApi = new CompanyApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
             string conditions = "ID=" + CompanyId;
 

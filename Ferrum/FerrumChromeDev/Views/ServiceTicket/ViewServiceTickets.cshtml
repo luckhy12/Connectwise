@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ConnectWiseSDK.TicketFindResult>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "ViewServiceTickets";
+}
+
+<h2>Service Tickets</h2>
+
+<div class="container">
+    <div class="pull-left" > <a href="@Url.Action("Index", "Home", new { callerID=ViewBag.Mobile})">Go To Landing Page</a> </div>
+    @Html.Grid(Model).Columns(columns =>
+   {
+       columns.Add(foo => foo.ContactName).Titled("ContactName").Sortable(false);
+       columns.Add(foo => foo.CompanyName).Css("grid-textAlign_right").Titled("CompanyName").Sortable(false);
+       columns.Add(foo => foo.AddressLine1).Titled("AddressLine1");
+       columns.Add(foo => foo.City).Titled("City").Sortable(false);
+       columns.Add(foo => foo.BoardName).Titled("BoardName").Sortable(false)
+
+   .Filterable(false).Sanitized(false).Encoded(false);
+   }).WithPaging(10).Sortable(true)
+
+    
+    
+   
+</div>

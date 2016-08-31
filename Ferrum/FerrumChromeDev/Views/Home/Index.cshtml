@@ -170,7 +170,8 @@
                 <a href="@Url.Action("AddNewServiceTicket", "ServiceTicket", new { CompanyID = Model.CompanyID, mobile = Model.Phone })" class="btn btn-default">Create</a>
 
 
-                <button type="button" class="btn btn-default" data-dismiss="modal">View</button>
+                <a href="@Url.Action("ViewServiceTickets", "ServiceTicket", new {mobile = Model.Phone })" class="btn btn-default">View Tickets</a>
+
             </div>
         </div>
     </div>
