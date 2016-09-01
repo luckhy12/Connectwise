@@ -340,8 +340,6 @@ namespace FerrumChromeDev.Controllers
             obj.CompanyIdentifier = list2.FirstOrDefault().CompanyIdentifier;
             return obj;
         }
-
-
     }
 
     public class FerrumItModel
