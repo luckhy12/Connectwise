@@ -4,9 +4,9 @@
     ViewBag.Title = "ViewServiceTickets";
 }
 
-<h2>Service Tickets</h2>
+<h2>Service Tickets @*(<a href='https://control.mysupport247.net/v4_6_release/services/system_io/Service/fv_sr100_request.rails?service_recid=@Model.FirstOrDefault().Id&companyName=MySupport247' target='_blank'> @Model.FirstOrDefault().Id </a>")*@ </h2>
 
-<div class="container">
+<div class="container table-responsive">
     <div class="pull-left" > <a href="@Url.Action("Index", "Home", new { callerID=ViewBag.Mobile})">Go To Landing Page</a> </div>
     @Html.Grid(Model).Columns(columns =>
    {
@@ -14,8 +14,9 @@
        columns.Add(foo => foo.CompanyName).Css("grid-textAlign_right").Titled("CompanyName").Sortable(false);
        columns.Add(foo => foo.AddressLine1).Titled("AddressLine1");
        columns.Add(foo => foo.City).Titled("City").Sortable(false);
-       columns.Add(foo => foo.BoardName).Titled("BoardName").Sortable(false)
-
+       columns.Add(foo => foo.BoardName).Titled("BoardName").Sortable(false);
+columns.Add(model => model.Id).Titled("Service Ticket")
+ .Filterable(true).Sanitized(false).Encoded(false).RenderValueAs(foo => "<a href='https://control.mysupport247.net/v4_6_release/services/system_io/Service/fv_sr100_request.rails?service_recid=" + @foo.Id+ "&companyName=MySupport247' target='_blank'>" + foo.Id + "</a>")
    .Filterable(false).Sanitized(false).Encoded(false);
    }).WithPaging(10).Sortable(true)
 

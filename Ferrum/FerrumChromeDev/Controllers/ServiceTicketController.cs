@@ -39,7 +39,7 @@ namespace FerrumChromeDev.Controllers
             ServiceTicketModel model = new ServiceTicketModel();
             model.contactno = mobile;
             model.CompanyId = CompanyID;
-
+            ViewBag.Mobile = mobile;
             return View(model);
 
         }
