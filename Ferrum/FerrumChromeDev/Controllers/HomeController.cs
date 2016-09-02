@@ -86,6 +86,7 @@ namespace FerrumChromeDev.Controllers
                     obj.FirstName = current2.FirstName;
                     obj.LastName = current2.LastName;
                     obj.Type = current2.Type;
+                    obj.CompanyName = current2.CompanyName;
                 }
             }
            // var phoneno = "2242307730";

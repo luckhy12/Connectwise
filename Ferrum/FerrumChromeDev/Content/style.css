@@ -1,0 +1,234 @@
+body
+{
+padding:0px;
+margin:0px;
+font-family:arial;
+}
+.ferrum_wd
+{
+width:500px;
+margin:0 auto;
+border:1px solid #202a47;
+}
+.call
+{
+color:#000;
+font-family:arial;
+background:#deecfb;
+font-size:18px;
+font-weight:400;
+padding:10px 0;
+border-bottom:1px solid #202a47;
+}
+.call img
+{
+height:50px;
+padding-left:10px;
+}
+.call_ot
+{
+text-align:right;
+float:right;
+padding-right:10px;
+padding-top:10px;
+}
+.ferrum_icon
+{
+width:30%;
+float:left;
+}
+.ferrum_text
+{
+width:70%;
+float:right;
+}
+.ferrum_hd_cl {
+  font-size: 18px;
+  color:#3b5ea2;
+  padding:2px;
+  margin: 0;
+}
+.ferrum_hd {
+  font-size: 16px;
+  margin: 0;
+  color:#768b80;
+  padding:2px;
+}
+.ferrum_nb {
+  font-size: 18px;
+  font-weight: bold;
+  padding:2px;
+  color:#162695;
+  margin: 0;
+}
+.ferrum_icon > img {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.btn_link > a {
+background: linear-gradient(#122aac, #12237e);
+  border-radius: 3px;
+  color: #fff;
+  float: left;
+  margin-top: 10px;
+  padding: 5px 25px;
+}
+.btn_link > a:hover {
+background: linear-gradient(#12237e, #122aac);
+text-decoration:none;
+  border-radius: 3px;
+  color: #fff;
+  float: left;
+  margin-top: 10px;
+  padding: 5px 25px;
+}
+.counter {
+  text-align: center;
+}
+.counter {
+background: linear-gradient(#12237e, #122aac);
+  border-radius: 5px;
+  padding: 10px 0;
+  text-align: center;
+  color:#fff;
+}
+.carousel-control.left {
+  background:transparent !important;
+}
+.carousel-control.right {
+  background:transparent !important;
+}
+.carousel-inner {
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  width: 90% !important;
+}
+.glyphicon.glyphicon-chevron-left {
+  color: #000;
+}
+.email {
+  text-align: center;
+}
+.glyphicon.glyphicon-chevron-right {
+  color: #000;
+}
+.padding_zero
+{
+padding:0px;
+}
+.padding_zero img {
+  float: right;
+  padding-top: 20px;
+  text-align: right;
+}
+.pa_zero p
+{
+margin:0px;
+}
+.caption {
+  padding-right: 10px;
+  padding-top: 10px;
+}
+.cl_bc {
+border-bottom:1px solid #000;
+  overflow: hidden;
+  width: 100%;
+  padding:10px 0;
+}
+.content {
+  background: #eee none repeat scroll 0 0;
+  padding-bottom: 10px;
+}
+.click_btn {
+  float: left;
+  width: 50%;
+text-align:center;
+}
+.click_btn a{
+padding:5px 30px;
+border-radius:3px;
+background: linear-gradient(#e83a2d, #6a0000);
+color:#fff;
+}
+.click_btn a:hover{
+padding:5px 30px;
+border-radius:3px;
+background: linear-gradient(#6a0000, #e83a2d);
+text-decoration:none;
+color:#fff;
+}
+.ferrum_btn {
+  overflow: hidden;
+  padding: 20px 10px;
+  width: 100%;
+}
+
+
+
+
+@media only screen and (max-width: 580px) {
+.ferrum_wd {
+  border: 1px solid #202a47;
+  margin: 0 auto;
+  width: 100%;
+}
+.click_btn a {
+  padding: 5px 20px;
+}
+.click_btn a:hover {
+  padding: 5px 20px;
+}
+.ferrum_text {
+  padding-left: 10px;
+}
+}
+
+@media only screen and (max-width: 480px) {
+.wd_cl {
+  float: left;
+  margin-bottom: 10px;
+  overflow: hidden;
+  width: 60%;
+}
+.wd_mg {
+  float: right;
+  margin: 0;
+  width: 40%;
+}
+.click_btn {
+  padding: 5px;
+  width: 100%;
+}
+}
+
+@media only screen and (max-width: 480px) {
+.wd_cl {
+  width: 100%;
+}
+.wd_mg {
+  width: 100%;
+}
+.counter {
+  margin: 0 auto;
+  max-width: 150px;
+}
+}
+
+@media only screen and (max-width: 360px) {
+.call img {
+  height: 45px;
+}
+.call {
+  font-size: 14px;
+}
+.ferrum_btn {
+  padding: 0 10px 20px;
+}
+.content {
+  padding-bottom: 5px;
+}
+.cl_bc {
+  padding: 5px 0 0;
+}
+}

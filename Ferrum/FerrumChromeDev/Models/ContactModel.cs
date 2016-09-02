@@ -29,7 +29,7 @@ namespace FerrumChromeDev.Models
             get;
             set;
         }
-
+        public string CompanyName { get; set; }
       public string companyIdentifier { get; set; }
         public int? CompanyID { get; set; }
         public string Type { get; set; }
