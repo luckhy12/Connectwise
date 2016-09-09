@@ -112,6 +112,8 @@
       <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -231,7 +233,25 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityModel.cs" />
+    <Compile Include="Models\CallHistory.cs">
+      <DependentUpon>Ferrum.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ContactModel.cs" />
+    <Compile Include="Models\Ferrum.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ferrum.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ferrum.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ferrum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ferrum.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ferrum.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ServiceTicketModel.cs" />
@@ -245,6 +265,7 @@
     <Content Include="Content\carousel.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\images\btn.png" />
     <Content Include="Content\images\call.png" />
     <Content Include="Content\images\calls.png" />
     <Content Include="Content\images\logo.png" />
@@ -264,6 +285,23 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <EntityDeploy Include="Models\Ferrum.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Ferrum.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Ferrum.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Ferrum.edmx</DependentUpon>
+      <LastGenOutput>Ferrum.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Ferrum.edmx.diagram">
+      <DependentUpon>Ferrum.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Ferrum.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Ferrum.edmx</DependentUpon>
+      <LastGenOutput>Ferrum.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\PublishProfiles\ChromePublish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\gridmvc.js" />
@@ -272,6 +310,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.tabSlideOut.v1.3.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -332,6 +371,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

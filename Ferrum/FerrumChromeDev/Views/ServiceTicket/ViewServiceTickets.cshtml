@@ -4,23 +4,34 @@
     ViewBag.Title = "ViewServiceTickets";
 }
 
-<h2>Service Tickets @*(<a href='https://control.mysupport247.net/v4_6_release/services/system_io/Service/fv_sr100_request.rails?service_recid=@Model.FirstOrDefault().Id&companyName=MySupport247' target='_blank'> @Model.FirstOrDefault().Id </a>")*@ </h2>
+<link href="~/Content/style.css" rel="stylesheet" />
 
-<div class="container table-responsive">
-    <div class="pull-left" > <a href="@Url.Action("Index", "Home", new { callerID=ViewBag.Mobile})">Go To Landing Page</a> </div>
-    @Html.Grid(Model).Columns(columns =>
+<div class="container">
+    <div class="ferrum_wd">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="call tx_ct"><img src="~/Content/images/logo.png"></div>
+                <div class="ticket_text">
+                    <div class="text_pr"><p>Service Tickets<a href="@Url.Action("Index", "Home", new { callerID=ViewBag.Mobile})"><span>X</span></a><p /></div>
+                </div>
+                <div class="table-responsive">
+                    @Html.Grid(Model).Columns(columns =>
    {
        columns.Add(foo => foo.ContactName).Titled("ContactName").Sortable(false);
        columns.Add(foo => foo.CompanyName).Css("grid-textAlign_right").Titled("CompanyName").Sortable(false);
-       columns.Add(foo => foo.AddressLine1).Titled("AddressLine1");
+
        columns.Add(foo => foo.City).Titled("City").Sortable(false);
        columns.Add(foo => foo.BoardName).Titled("BoardName").Sortable(false);
-columns.Add(model => model.Id).Titled("Service Ticket")
- .Filterable(true).Sanitized(false).Encoded(false).RenderValueAs(foo => "<a href='https://control.mysupport247.net/v4_6_release/services/system_io/Service/fv_sr100_request.rails?service_recid=" + @foo.Id+ "&companyName=MySupport247' target='_blank'>" + foo.Id + "</a>")
-   .Filterable(false).Sanitized(false).Encoded(false);
+       columns.Add(model => model.Id).Titled("Service Ticket")
+        .Filterable(true).Sanitized(false).Encoded(false).RenderValueAs(foo => "<a href='https://control.mysupport247.net/v4_6_release/services/system_io/Service/fv_sr100_request.rails?service_recid=" + @foo.Id + "&companyName=MySupport247' target='_blank'>" + foo.Id + "</a>")
+          .Filterable(false).Sanitized(false).Encoded(false);
    }).WithPaging(10).Sortable(true)
 
-    
-    
-   
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
 </div>

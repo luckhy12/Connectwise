@@ -8,29 +8,83 @@ using Firebase.Database.Query;
 using System.Threading.Tasks;
 using ConnectWiseSDK;
 using FerrumChromeDev.Models;
-
+using System.Timers;
+using FerrumChromeDev.Models;
+using System.Diagnostics;
 namespace FerrumChromeDev.Controllers
 {
+    
     public class HomeController : Controller
     {
+      
+
+        amandataEntities db = new Models.amandataEntities();
         public async Task<ActionResult> CaptureCall(string PhoneNo, string ExtNo)
         {
-            FerrumItModel model = new FerrumItModel();
-            model.PhoneNo = PhoneNo;
-            model.PhoneExt = ExtNo;
+            if (Session["Call"] == null)
+            {
+               
+                Session["Call"] = PhoneNo;
+                Session["Extension"] = ExtNo;
+                Session["CallTime"] = DateTime.Now;
+                FerrumItModel model = new FerrumItModel();
+                model.PhoneNo = PhoneNo;
+                model.PhoneExt = ExtNo;
 
 
-            var firebase = new FirebaseClient("https://ferrumit-91817.firebaseio.com/");
-            var dino = await firebase
-  .Child("")
-  .PostAsync(model);
-
+                var firebase = new FirebaseClient("https://ferrumit-91817.firebaseio.com/");
+                var dino = await firebase
+      .Child("")
+      .PostAsync(model);
+            }
             string text3 = "<?xml version='1.0' encoding='UTF-8' ?><response><result><call_url/></result></response>";
             return base.Content(text3, "text/xml");
 
             //return View();
         }
+        public  ActionResult EndCall(string PhoneNo)
+        {
+            if (Session["Call"] != null)
+            {
 
+               
+
+                string Name = "";
+                string conditions = "Phone = '" + PhoneNo + "'";
+                List<ContactFindResult> list3 = _contactApi.FindContacts(conditions, "", new int?(1000), new int?(0), "", new List<string>
+    {
+        "Id",
+        "FirstName",
+        "LastName",
+        "Type",
+        "CompanyId",
+        "CompanyName"
+    });
+                if (list3.Count > 0)
+                {
+                    Name = list3[0].FirstName + " " + list3[0].LastName;
+                }
+                TimeSpan duration = DateTime.Now - DateTime.Parse(Session["CallTime"].ToString());
+
+                CallHistory tableobj = new Models.CallHistory();
+
+                tableobj.CallDate = DateTime.Now;
+                tableobj.ContactNo = PhoneNo;
+                tableobj.Name = Name;
+                tableobj.UserExtension = Session["Extension"].ToString();
+                tableobj.CallTime = duration.TotalMinutes.ToString();
+                db.CallHistories.Add(tableobj);
+                db.SaveChanges();
+
+             
+                Session["Call"] = null;
+            }
+        
+            string text3 = "<?xml version='1.0' encoding='UTF-8' ?><response><result><call_url/></result></response>";
+            return base.Content(text3, "text/xml");
+
+            //return View();
+        }
         private static ContactApi _contactApi;
         private static CompanyApi _companyApi;
         private static ActivityApi _activityApi;
@@ -111,6 +165,9 @@ namespace FerrumChromeDev.Controllers
                     Subject = currentactivity.Subject
                 });
             }
+            string ExtNo = Session["Extension"].ToString();
+            ViewBag.CallHistory = db.CallHistories.Where(x => x.UserExtension == ExtNo).ToList();
+
             return View(obj);
         }
 

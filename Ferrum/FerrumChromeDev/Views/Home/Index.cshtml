@@ -4,8 +4,24 @@
     Layout = null;
     var i = 0;
 }
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
 
+@helper Truncate(string input, int length)
+{
+    var Text=input;
+    if(input !=null)
+    { 
+    if(input.Length <= length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text><a href="#" style="color:blue" onclick="ReadMore('@Text')">..Read More</a> </text>
+ 
+}}
+}
 
 
 <html lang="en">
@@ -19,7 +35,7 @@
     <link rel="icon" href="../../favicon.ico">
     <title>Ferrum</title>
     <!-- Bootstrap core CSS -->
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet">
 </head>
 <!-- NAVBAR
@@ -62,6 +78,11 @@
                         </div>
                     </div>
                     <div class="col-md-12">
+                        <div class="bc_cl">
+                            <h5>Active Notes</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="ferrum_testimonal">
                             <div class="content">
                                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -90,7 +111,7 @@
                                                                         <p class="text-info lead adjust2">@activity.ActivityTypeDescription by @activity.AssignTo @activity.DueDate</p>
                                                                         <p>
                                                                             <span class="glyphicon glyphicon-thumbs-up">
-                                                                            </span>- @activity.Notes
+                                                                            </span>- @Truncate(activity.Notes,50)
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -206,12 +227,142 @@ else
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Bootstrap core JavaScript
+    <div class="modal fade" id="myTextModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"> Ticket Note</h4>
+                </div>
+                <div  class="modal-body">
+                    <p id="NoteText"> </p>
+                </div>
+             
+            </div>
+        </div>
+    </div>
+              
+    <div class="ferrum_wds navbar-default call_bl side-collapse in">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="call"><img src="~/Content/images/logo.png"></div>
+            </div>
+            <div class="col-md-12">
+                @*<div class="cl_bc">
+                    <div class="col-md-12 col-xs-12 col-sm-12 wd_cl">
+                        <div class="">
+                            <div class="ferrum_icon">
+                                <img src="~/Content/images/call.png">
+                            </div>
+                            <div class="ferrum_text">
+                                <h4 class="ferrum_hd_cl">Bob Smith</h4>
+                                <h4 class="ferrum_hd">Callinize-Support</h4>
+                                <h4 class="ferrum_nb">2242307730</h4>
+                                <div class="btn_link"><a href="#">Lead</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+                <div class="bc_cl">
+                    <h5>Call History</h5>
+                </div>
+                <div class="miss">
+                    <div class="cust_cll">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                       Name
+                                    </th>
+                                    <th>
+                                        Contact No
+                                    </th>
+                                    <th>
+                                        Call Duration
+                                    </th>
+                                    <th>
+                                        Date
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.CallHistory != null)
+                                {
+                                    foreach (var item in ViewBag.CallHistory)
+                                    { 
+                                <tr class="success">
+                                    <td>
+                                        @item.Name
+                                    </td>
+                                    <td>
+                                        @item.ContactNo
+                                    </td>
+                                    <td>
+                                        @item.CallTime
+                                    </td>
+                                    <td>
+                                        @item.CallDate
+                                    </td>
+                                </tr>
+                                    }
+                                }
+                                @*<tr>
+                                    <td>
+                                        Smith
+                                    </td>
+                                    <td>
+                                        655466434
+                                    </td>
+                                    <td>
+                                        05:45:45
+                                    </td>
+                                    <td>
+                                        06/08/2016
+                                    </td>
+                                </tr>
+                                <tr class="success">
+                                    <td>
+                                        Bob
+                                    </td>
+                                    <td>
+                                        655466434
+                                    </td>
+                                    <td>
+                                        05:45:45
+                                    </td>
+                                    <td>
+                                        06/08/2016
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Smith
+                                    </td>
+                                    <td>
+                                        655466434
+                                    </td>
+                                    <td>
+                                        05:45:45
+                                    </td>
+                                    <td>
+                                        06/08/2016
+                                    </td>
+                                </tr>*@
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:block" data-toggle="collapse-side" data-target=".side-collapse" type="button" class="navbar-toggle mg_bt">
+        <span><i id="SideBar" class="fa fa-angle-double-left" aria-hidden="true"></i></span>
+    </div>                      <!-- Bootstrap core JavaScript
                                     ================================================== -->
                                     <!-- Placed at the end of the document so the pages load faster -->
                                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
                                     @*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
-                                     <script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
                                     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
                                    
                                     <script>
@@ -258,6 +409,19 @@ else
                                                     }
                                                 });
                                         }
+
+                                        function ReadMore(text)
+                                        {
+                                            $("#myTextModal").modal('show');
+                                            $("#NoteText").html('');
+                                            $("#NoteText").text(text);
+                                        }
+                                        $(document).ready(function () {
+                                            $('[data-toggle=collapse-side]').click(function (e) {
+                                                $('.side-collapse').toggleClass('in');
+                                                $("#SideBar").toggleClass('fa-angle-double-right');
+                                            });
+                                        });
                                     </script>
 
                                 </body>
@@ -369,134 +533,134 @@ else
 
 
                             @*@if (Model.FirstName != null)
-                                          {
-                                <div class="container" style="height:200px;width:400px">
-                                    <div class="row">
-                                        <label style="margin-top:10px;margin-bottom:0px">OUTGOING CALL </label>
-                                        <hr />
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-2 col-xs-2">
-                                                    <div class="row">
-                                                        <span class="fa fa-phone-square fa-4x" />
-                                                    </div>
-                                                    <div class="row">&nbsp;</div>
+          {
+<div class="container" style="height:200px;width:400px">
+    <div class="row">
+        <label style="margin-top:10px;margin-bottom:0px">OUTGOING CALL </label>
+        <hr />
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+                    <div class="row">
+                        <span class="fa fa-phone-square fa-4x" />
+                    </div>
+                    <div class="row">&nbsp;</div>
 
-                                                </div>
-                                                <div class="col-md-5 col-xs-5" style="margin-left:5px">
-                                                    <div class="row">
-                                                        <span style="color:#CCDEE2">@Model.FirstName @Model.LastName</span>
-                                                    </div>
-                                                    <div class="row">
-                                                        <label style="color:lightgray">Callinize-Support</label>
-                                                    </div>
-                                                    <div class="row">
-                                                        <label id="phoneNoLabel" style="color:darkblue">@Model.Phone</label>
-                                                    </div>
-                                                    <div class="row">
-                                                        <button type="button" class="btn btn-primary">Lead</button>
-                                                    </div>
+                </div>
+                <div class="col-md-5 col-xs-5" style="margin-left:5px">
+                    <div class="row">
+                        <span style="color:#CCDEE2">@Model.FirstName @Model.LastName</span>
+                    </div>
+                    <div class="row">
+                        <label style="color:lightgray">Callinize-Support</label>
+                    </div>
+                    <div class="row">
+                        <label id="phoneNoLabel" style="color:darkblue">@Model.Phone</label>
+                    </div>
+                    <div class="row">
+                        <button type="button" class="btn btn-primary">Lead</button>
+                    </div>
 
-                                                </div>
+                </div>
 
-                                                <div class="pull-right col-md-4 col-xs-4">
-                                                    <div class="row text-center" style="background-color:#DFEFFF;border-radius:15px">
-                                                        <label>00:00:06</label>
-                                                        <span>hour:min:sec</span>
-                                                    </div>
-                                                    <div class="row">&nbsp;</div>
-                                                    <div class="row">
-                                                        <a style="color:black;font-size:10px">Email Templates<span class="caret" /></a>
-                                                        <span style="color:#1979CA" class="pull-right"><i class="fa fa-envelope" aria-hidden="true"></i> </span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                <div class="pull-right col-md-4 col-xs-4">
+                    <div class="row text-center" style="background-color:#DFEFFF;border-radius:15px">
+                        <label>00:00:06</label>
+                        <span>hour:min:sec</span>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <a style="color:black;font-size:10px">Email Templates<span class="caret" /></a>
+                        <span style="color:#1979CA" class="pull-right"><i class="fa fa-envelope" aria-hidden="true"></i> </span>
+                    </div>
+                </div>
+            </div>
 
-                                        </div>
+        </div>
 
-                                        <div class="row">
-                                            <hr style="border-top: dotted 1px;" />
-                                            <div class="col-md-12">
-                                                <div class="col-md-1 col-xs-1">
-                                                    <a id="prev" style="color:darkgray"><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a>
-                                                </div>
-                                                <div class="col-md-8 col-xs-8">
-                                                    <div class="divs">
-                                                        @if (Model.ActivityList.Count > 0 || Model.ActivityList!=null)
-                                                        {
-                                                        foreach (var activity in @Model.ActivityList)
-                                                        {
-                                                        <div class="row">
-                                                            <label style="color:lightgray">@activity.ActivityTypeDescription by @activity.AssignTo @activity.DueDate</label>
-                                                            <label>- @activity.Notes</label>
-                                                        </div>
-                                                        }
-                                                        }
-                                                        else
-                                                        {
-                                                        <div class="row">
-                                                            <label style="color:lightgray">No Activity Added</label>
-                                                        </div>
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="pull-right col-md-2 col-xs-2">
-                                                <a id="next" style="color:darkblue"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row" style="background-color:#DFEFFF">
-                                        <div class="col-md-12 col-xs-12 text-center" style="margin-top:6px;margin-bottom:6px">
-                                            <a onclick="AddActivity()" href="javascript:void(0)" class="btn btn-primary">Click here to add activity</a>
-                                        </div>
-                                        <div class="row text-center" style="margin-top:6px;margin-bottom:6px">
-                                            <a href="javascript:void(0)" onclick="CreateTicket('@Model.Phone')" class="btn btn-primary" style="width:180px">Click here to create ticket</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                          }
-                                          else
-                                          {
+        <div class="row">
+            <hr style="border-top: dotted 1px;" />
+            <div class="col-md-12">
+                <div class="col-md-1 col-xs-1">
+                    <a id="prev" style="color:#DFEFFF"><i class="fa fa-angle-left fa-4x" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-8 col-xs-8">
+                    <div class="divs">
+                        @if (Model.ActivityList.Count > 0 || Model.ActivityList!=null)
+                        {
+                        foreach (var activity in @Model.ActivityList)
+                        {
+                        <div class="row">
+                            <label style="color:lightgray">@activity.ActivityTypeDescription by @activity.AssignTo @activity.DueDate</label>
+                            <label>- @activity.Notes</label>
+                        </div>
+                        }
+                        }
+                        else
+                        {
+                        <div class="row">
+                            <label style="color:lightgray">No Activity Added</label>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="pull-right col-md-2 col-xs-2">
+                <a id="next" style="color:#3276B1"><i class="fa fa-angle-right fa-4x" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row" style="background-color:#DFEFFF">
+        <div class="col-md-12 col-xs-12 text-center" style="margin-top:6px;margin-bottom:6px">
+            <a onclick="AddActivity()" href="javascript:void(0)" class="btn btn-primary">Click here to add activity</a>
+        </div>
+        <div class="row text-center" style="margin-top:6px;margin-bottom:6px">
+            <a href="javascript:void(0)" onclick="CreateTicket('@Model.Phone')" class="btn btn-primary" style="width:180px">Click here to create ticket</a>
+        </div>
+    </div>
+</div>
+          } 
+          else
+          {
 
-                                <div class="container" style="height:400px;width:400px">
+<div class="container" style="height:400px;width:400px">
 
-                                    <div class="row">
-                                        <label style="margin-top:10px;margin-bottom:0px">Incoming CALL </label>
-                                        <hr />
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="col-md-2">
-                                                <div class="row">
-                                                    <span class="fa fa-phone-square fa-4x" />
-                                                </div>
-                                                <div class="row">
-                                                    <a href="@Url.Action("AddContact","Home",new {CallerID = Model.Phone })">Create</a>
-                                                </div>
+    <div class="row">
+        <label style="margin-top:10px;margin-bottom:0px">Incoming CALL </label>
+        <hr />
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="row">
+                    <span class="fa fa-phone-square fa-4x" />
+                </div>
+                <div class="row">
+                    <a href="@Url.Action("AddContact","Home",new {CallerID = Model.Phone })">Create</a>
+                </div>
 
-                                            </div>
-                                            <div class="col-md-6" style="margin-left:5px">
-                                                <div class="row">
-                                                    <span style="color:#CCDEE2">No User</span>
-                                                </div>
-                                                <div class="row">
-                                                    <label style="color:lightgray">Callinize-Support</label>
-                                                </div>
+            </div>
+            <div class="col-md-6" style="margin-left:5px">
+                <div class="row">
+                    <span style="color:#CCDEE2">No User</span>
+                </div>
+                <div class="row">
+                    <label style="color:lightgray">Callinize-Support</label>
+                </div>
 
 
-                                            </div>
-                                            <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            </div>
+        </div>
+    </div>
+</div>
                                           }*@
-
+                
 
 

@@ -3,7 +3,8 @@
     ViewBag.Title = "AddActivity";
 }
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-@using (Html.BeginForm("SaveActivity", "Home"))
+<link href="~/Content/style.css" rel="stylesheet" />
+@*@using (Html.BeginForm("SaveActivity", "Home"))
 {
     @Html.HiddenFor(m => m.ContactId)
     @Html.HiddenFor(m => m.CompanyIdentifier)
@@ -42,8 +43,55 @@
         </div>
     </div>
 
-}
+}*@
+<div class="container">
+    <div class="ferrum_wd">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="call tx_ct"><img src="~/Content/images/logo.png"></div>
+                <div class="ticket_text">
+                    <div class="text_pr"><p>Add Activity - New Activity Entry<a href="@Url.Action("Index", "Home", new { callerID=ViewBag.Mobile})"><span>X</span></a><p /></div>
+                </div>
+@using (Html.BeginForm("SaveActivity", "Home"))
+{
+    @Html.HiddenFor(m => m.ContactId)
+    @Html.HiddenFor(m => m.CompanyIdentifier)
+                <div class="sv_br">
+                   
+                  
+                    <div class="sv_ar">
+                        <p>Activity Type:</p>
+                       
+                            @Html.DropDownListFor(r => r.ActivityType, (IEnumerable<SelectListItem>)ViewBag.ActivityList, "Select Type", new { @id = "activityTypeDD", @class = "form-control" })
+                       
+                    </div>
+                    <div class="sv_ar">
+                        <p>Member:</p>
 
+                       @Html.DropDownListFor(r => r.AssignTo, (IEnumerable<SelectListItem>)ViewBag.MembersList, "Select Member", new { @class = "form-control" })
+
+
+                    </div>
+                    <div class="sv_ar">
+                        <p>Subject:</p>
+
+                        @Html.TextBoxFor(m => m.Subject, new { @class = "form-control input-lg" })
+                    </div>
+                    <div class="ticket_text mg_p">
+                        <p>Note:</p>
+                        <div class="td_note wd_td">
+                            <div class="">
+                                @Html.TextAreaFor(m => m.Notes, new { @class = "form-control", @style="height:150px;" })
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+}
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $("#comapanyDD").change(function () {
        // alert("sf");

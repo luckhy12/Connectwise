@@ -2,36 +2,52 @@
 @{
     ViewBag.Title = "AddNewServiceTicket";
 }
+<link href="~/Content/style.css" rel="stylesheet" />
 
-<h3>Quick Ticket - New Service Ticket Entry</h3>
 <div class="container">
-    <div class="col-sm-12 pull-left"> <a href="@Url.Action("Index", "Home", new { callerID=ViewBag.Mobile})">Go To Landing Page</a> </div>
-    <div class="row">
-        @using (Html.BeginForm())
-        {
-            @Html.HiddenFor(m => m.CompanyId, Model.CompanyId)
-            @Html.HiddenFor(M => M.contactno, Model.contactno)
+    <div class="ferrum_wd">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="call tx_ct"><img src="~/Content/images/logo.png"></div>
+                <div class="ticket_text">
+                    <div class="text_pr"><p>Quick Ticket - New Service Ticket Entry<a href="@Url.Action("Index", "Home", new { callerID=ViewBag.Mobile})"><span>X</span></a><p /></div>
+                </div>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.CompanyId, Model.CompanyId)
+    @Html.HiddenFor(M => M.contactno, Model.contactno)
+                <div class="sv_br">
+                   
+                    @*<div class="sv_ar">
+                        <p>Service Board:</p>
+                        <div class="sv_txss">
+                            <select class="sl_bx">
+                                <option>Service Board:</option>
+                                <option>Service Board:</option>
+                                <option>Service Board:</option>
+                                <option>Service Board:</option>
+                                <option>Service Board:</option>
+                            </select>
+                        </div>
+                    </div>*@
+                    <div class="sv_ar">
+                        <p>Summary:</p>
+                        @Html.TextBoxFor(m => m.tktSummary, new { @class = "form-control", placeholder = "{Summary Description}" })
+                        @*<div class="sv_tx">{Summary description}</div>*@
+                    </div>
 
-            @*<div class="form-group">
-                    <label for="exampleInputPassword1">Service Board :</label>
-                    <select class="form-control">
-                        <option>Default select</option>
-                    </select>
-                </div>*@
-            <div class="form-group">
-                <label for="exampleInputPassword1">Summary :</label>
-                @Html.TextBoxFor(m => m.tktSummary, new { @class = "form-control", placeholder = "{Summary Description}" })
-
+                    <div class="ticket_text mg_p">
+                        <p>Note:</p>
+                        <div class="td_note wd_td">
+                            <div class="">
+                                @Html.TextAreaFor(m => m.Notes, new { @class = "form-control", @style="height:150px;" })
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+}
             </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Notes :</label>
-                @Html.TextAreaFor(m => m.Notes, new { @class = "form-control" })
-
-
-
-            </div>
-
-            <button type="submit" class="btn btn-default">Submit</button>
-        }
+        </div>
     </div>
 </div>
