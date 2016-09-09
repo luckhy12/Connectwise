@@ -47,11 +47,12 @@ namespace FerrumChromeDev.Controllers
             if (Session["Call"] != null)
             {
 
-               
+                if (Session["Call"].ToString() == PhoneNo)
+                {
 
-                string Name = "";
-                string conditions = "Phone = '" + PhoneNo + "'";
-                List<ContactFindResult> list3 = _contactApi.FindContacts(conditions, "", new int?(1000), new int?(0), "", new List<string>
+                    string Name = "";
+                    string conditions = "Phone = '" + PhoneNo + "'";
+                    List<ContactFindResult> list3 = _contactApi.FindContacts(conditions, "", new int?(1000), new int?(0), "", new List<string>
     {
         "Id",
         "FirstName",
@@ -60,26 +61,26 @@ namespace FerrumChromeDev.Controllers
         "CompanyId",
         "CompanyName"
     });
-                if (list3.Count > 0)
-                {
-                    Name = list3[0].FirstName + " " + list3[0].LastName;
+                    if (list3.Count > 0)
+                    {
+                        Name = list3[0].FirstName + " " + list3[0].LastName;
+                    }
+                    TimeSpan duration = DateTime.Now - DateTime.Parse(Session["CallTime"].ToString());
+
+                    CallHistory tableobj = new Models.CallHistory();
+
+                    tableobj.CallDate = DateTime.Now;
+                    tableobj.ContactNo = PhoneNo;
+                    tableobj.Name = Name;
+                    tableobj.UserExtension = Session["Extension"].ToString();
+                    tableobj.CallTime = duration.Hours.ToString() + ":" + duration.Minutes.ToString() + ":" + duration.Seconds.ToString();
+                    db.CallHistories.Add(tableobj);
+                    db.SaveChanges();
+
+
+                    Session["Call"] = null;
                 }
-                TimeSpan duration = DateTime.Now - DateTime.Parse(Session["CallTime"].ToString());
-
-                CallHistory tableobj = new Models.CallHistory();
-
-                tableobj.CallDate = DateTime.Now;
-                tableobj.ContactNo = PhoneNo;
-                tableobj.Name = Name;
-                tableobj.UserExtension = Session["Extension"].ToString();
-                tableobj.CallTime = duration.TotalMinutes.ToString();
-                db.CallHistories.Add(tableobj);
-                db.SaveChanges();
-
-             
-                Session["Call"] = null;
             }
-        
             string text3 = "<?xml version='1.0' encoding='UTF-8' ?><response><result><call_url/></result></response>";
             return base.Content(text3, "text/xml");
 
@@ -152,7 +153,8 @@ namespace FerrumChromeDev.Controllers
         "Notes",
         "AssignToResource",
         "DueDate",
-        "ActivityTypeDescription"
+        "ActivityTypeDescription",
+        "StartTime"
             });
             foreach (ActivityFindResult currentactivity in activitylist)
             {
@@ -161,12 +163,12 @@ namespace FerrumChromeDev.Controllers
                     ActivityTypeDescription = currentactivity.ActivityTypeDescription,
                     AssignTo = currentactivity.AssignToResource,
                     Notes = currentactivity.Notes,
-                    DueDate = currentactivity.DueDate,
+                    DueDate = currentactivity.StartTime,
                     Subject = currentactivity.Subject
                 });
             }
             string ExtNo = Session["Extension"].ToString();
-            ViewBag.CallHistory = db.CallHistories.Where(x => x.UserExtension == ExtNo).ToList();
+            ViewBag.CallHistory = db.CallHistories.Where(x => x.UserExtension == ExtNo).OrderBy(x=>x.ID).Take(10).ToList();
 
             return View(obj);
         }
