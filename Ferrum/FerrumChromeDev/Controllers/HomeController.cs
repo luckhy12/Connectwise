@@ -23,9 +23,9 @@ namespace FerrumChromeDev.Controllers
         {
             if (Session["Call"] == null)
             {
-               
+
                 Session["Call"] = PhoneNo;
-                Session["Extension"] = ExtNo;
+
                 Session["CallTime"] = DateTime.Now;
                 FerrumItModel model = new FerrumItModel();
                 model.PhoneNo = PhoneNo;
@@ -37,12 +37,13 @@ namespace FerrumChromeDev.Controllers
       .Child("")
       .PostAsync(model);
             }
+            
             string text3 = "<?xml version='1.0' encoding='UTF-8' ?><response><result><call_url/></result></response>";
             return base.Content(text3, "text/xml");
 
             //return View();
         }
-        public  ActionResult EndCall(string PhoneNo)
+        public ActionResult EndCall(string PhoneNo, string Ext)
         {
             if (Session["Call"] != null)
             {
@@ -72,7 +73,7 @@ namespace FerrumChromeDev.Controllers
                     tableobj.CallDate = DateTime.Now;
                     tableobj.ContactNo = PhoneNo;
                     tableobj.Name = Name;
-                    tableobj.UserExtension = Session["Extension"].ToString();
+                    tableobj.UserExtension = Ext;
                     tableobj.CallTime = duration.Hours.ToString() + ":" + duration.Minutes.ToString() + ":" + duration.Seconds.ToString();
                     db.CallHistories.Add(tableobj);
                     db.SaveChanges();
@@ -92,9 +93,9 @@ namespace FerrumChromeDev.Controllers
         private static MemberApi _memberApi;
 
 
-        public ActionResult Index(string callerID="2242307730")
+        public ActionResult Index(string ExtNo, string callerID = "2242307730")
         {
-
+          
             if (callerID.StartsWith(" 1"))
             {
                 callerID = callerID.Remove(0, 2);
@@ -167,8 +168,8 @@ namespace FerrumChromeDev.Controllers
                     Subject = currentactivity.Subject
                 });
             }
-            string ExtNo = Session["Extension"].ToString();
-            ViewBag.CallHistory = db.CallHistories.Where(x => x.UserExtension == ExtNo).OrderBy(x=>x.ID).Take(10).ToList();
+           
+            ViewBag.CallHistory = db.CallHistories.Where(x => x.UserExtension == ExtNo).OrderBy(x => x.ID).Take(10).ToList();
 
             return View(obj);
         }

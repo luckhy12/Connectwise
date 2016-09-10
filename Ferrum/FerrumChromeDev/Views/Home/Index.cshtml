@@ -266,6 +266,8 @@ else
                 <div class="bc_cl">
                     <h5>Call History</h5>
                 </div>
+                @if(ViewBag.CallHistory!=null)
+                { 
                 <div class="miss">
                     <div class="cust_cll">
                         <table class="table">
@@ -352,6 +354,7 @@ else
                         </table>
                     </div>
                 </div>
+                }
             </div>
         </div>
     </div>
