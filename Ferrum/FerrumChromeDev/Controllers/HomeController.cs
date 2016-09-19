@@ -2,95 +2,86 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Firebase.Database.Query;
 using System.Threading.Tasks;
 using ConnectWiseSDK;
 using FerrumChromeDev.Models;
-using System.Timers;
-using FerrumChromeDev.Models;
-using System.Diagnostics;
 namespace FerrumChromeDev.Controllers
 {
-    
+
     public class HomeController : Controller
     {
-      
+        private static ContactApi _contactApi;
+        private static CompanyApi _companyApi;
+        private static ActivityApi _activityApi;
+        private static MemberApi _memberApi;
 
-        amandataEntities db = new Models.amandataEntities();
+        //   amandataEntities db = new Models.amandataEntities();
         public async Task<ActionResult> CaptureCall(string PhoneNo, string ExtNo)
         {
-            if (Session["Call"] == null)
-            {
-
+            //if (Session["Call"] == null)
+            //{
                 Session["Call"] = PhoneNo;
-
                 Session["CallTime"] = DateTime.Now;
                 FerrumItModel model = new FerrumItModel();
                 model.PhoneNo = PhoneNo;
                 model.PhoneExt = ExtNo;
 
-
                 var firebase = new FirebaseClient("https://ferrumit-91817.firebaseio.com/");
                 var dino = await firebase
       .Child("")
       .PostAsync(model);
-            }
+           // }
             
             string text3 = "<?xml version='1.0' encoding='UTF-8' ?><response><result><call_url/></result></response>";
             return base.Content(text3, "text/xml");
-
-            //return View();
         }
-        public ActionResult EndCall(string PhoneNo, string Ext)
-        {
-            if (Session["Call"] != null)
-            {
+    //    public ActionResult EndCall(string PhoneNo, string Ext)
+    //    {
+    //        if (Session["Call"] != null)
+    //        {
 
-                if (Session["Call"].ToString() == PhoneNo)
-                {
+    //            if (Session["Call"].ToString() == PhoneNo)
+    //            {
 
-                    string Name = "";
-                    string conditions = "Phone = '" + PhoneNo + "'";
-                    List<ContactFindResult> list3 = _contactApi.FindContacts(conditions, "", new int?(1000), new int?(0), "", new List<string>
-    {
-        "Id",
-        "FirstName",
-        "LastName",
-        "Type",
-        "CompanyId",
-        "CompanyName"
-    });
-                    if (list3.Count > 0)
-                    {
-                        Name = list3[0].FirstName + " " + list3[0].LastName;
-                    }
-                    TimeSpan duration = DateTime.Now - DateTime.Parse(Session["CallTime"].ToString());
+    //                string Name = "";
+    //                string conditions = "Phone = '" + PhoneNo + "'";
+    //                List<ContactFindResult> list3 = _contactApi.FindContacts(conditions, "", new int?(1000), new int?(0), "", new List<string>
+    //{
+    //    "Id",
+    //    "FirstName",
+    //    "LastName",
+    //    "Type",
+    //    "CompanyId",
+    //    "CompanyName"
+    //});
+    //                if (list3.Count > 0)
+    //                {
+    //                    Name = list3[0].FirstName + " " + list3[0].LastName;
+    //                }
+    //                TimeSpan duration = DateTime.Now - DateTime.Parse(Session["CallTime"].ToString());
 
-                    CallHistory tableobj = new Models.CallHistory();
+    //                CallHistory tableobj = new Models.CallHistory();
 
-                    tableobj.CallDate = DateTime.Now;
-                    tableobj.ContactNo = PhoneNo;
-                    tableobj.Name = Name;
-                    tableobj.UserExtension = Ext;
-                    tableobj.CallTime = duration.Hours.ToString() + ":" + duration.Minutes.ToString() + ":" + duration.Seconds.ToString();
-                    db.CallHistories.Add(tableobj);
-                    db.SaveChanges();
+    //                tableobj.CallDate = DateTime.Now;
+    //                tableobj.ContactNo = PhoneNo;
+    //                tableobj.Name = Name;
+    //                tableobj.UserExtension = Ext;
+    //                tableobj.CallTime = duration.Hours.ToString() + ":" + duration.Minutes.ToString() + ":" + duration.Seconds.ToString();
+    //                db.CallHistories.Add(tableobj);
+    //                db.SaveChanges();
 
 
-                    Session["Call"] = null;
-                }
-            }
-            string text3 = "<?xml version='1.0' encoding='UTF-8' ?><response><result><call_url/></result></response>";
-            return base.Content(text3, "text/xml");
+    //                Session["Call"] = null;
+    //            }
+    //        }
+    //        string text3 = "<?xml version='1.0' encoding='UTF-8' ?><response><result><call_url/></result></response>";
+    //        return base.Content(text3, "text/xml");
 
-            //return View();
-        }
-        private static ContactApi _contactApi;
-        private static CompanyApi _companyApi;
-        private static ActivityApi _activityApi;
-        private static MemberApi _memberApi;
+    //        //return View();
+    //    }
+        
 
 
         public ActionResult Index(string ExtNo, string callerID = "2242307730")
@@ -169,7 +160,7 @@ namespace FerrumChromeDev.Controllers
                 });
             }
            
-            ViewBag.CallHistory = db.CallHistories.Where(x => x.UserExtension == ExtNo).OrderBy(x => x.ID).Take(10).ToList();
+           // ViewBag.CallHistory = db.CallHistories.Where(x => x.UserExtension == ExtNo).OrderBy(x => x.ID).Take(10).ToList();
 
             return View(obj);
         }
@@ -238,6 +229,7 @@ namespace FerrumChromeDev.Controllers
             var result = _activityApi.AddOrUpdateActivity(activityModel);
             return RedirectToAction("Index", new { callerID = model.Phone });
         }
+
         public ActionResult AddActivity(string Phone,int ID)
         {
             _companyApi = new CompanyApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
@@ -332,17 +324,17 @@ namespace FerrumChromeDev.Controllers
 
 
 
-        public ActionResult Test()
-        {
-            // _memberApi = new MemberApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
-            // List<MemberFindResult> list2 = _memberApi.FindMembers("", "FirstName asc", new int?(1000), new int?(0), new List<string>());
-            ServiceTicketApi _serviceTicketApi;
-            _serviceTicketApi = new ServiceTicketApi("https://api-eu.myconnectwise.net", "novaram", "callcenter", "Test123!", "NovaramCred");
-            var result = _serviceTicketApi.FindServiceTickets("","",new int?(1000),new int?(0),false ,new List<string>());
+        //public ActionResult Test()
+        //{
+        //    // _memberApi = new MemberApi("https://control.mysupport247.net", "Mysupport247", "SwitchvoxAPI", "mH5219b2vri0KUa", "NovaramCred1");
+        //    // List<MemberFindResult> list2 = _memberApi.FindMembers("", "FirstName asc", new int?(1000), new int?(0), new List<string>());
+        //    ServiceTicketApi _serviceTicketApi;
+        //    _serviceTicketApi = new ServiceTicketApi("https://api-eu.myconnectwise.net", "novaram", "callcenter", "Test123!", "NovaramCred");
+        //    var result = _serviceTicketApi.FindServiceTickets("","",new int?(1000),new int?(0),false ,new List<string>());
 
 
-            return View();
-        }
+        //    return View();
+        //}
 
         public int GetContactsId(string Contact)
         {
