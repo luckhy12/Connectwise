@@ -54,6 +54,7 @@
                 </div>
 @using (Html.BeginForm("SaveActivity", "Home"))
 {
+    @Html.HiddenFor(m=>m.Phone)
     @Html.HiddenFor(m => m.ContactId)
     @Html.HiddenFor(m => m.CompanyIdentifier)
                 <div class="sv_br">
