@@ -84,7 +84,7 @@ namespace FerrumChromeDev.Controllers
         
 
 
-        public ActionResult Index(string ExtNo, string callerID = "2242307730")
+        public ActionResult Index(string callerID = "2242307730")
         {
           
             if (callerID.StartsWith(" 1"))
@@ -277,7 +277,6 @@ namespace FerrumChromeDev.Controllers
             model.CompanyIdentifier = list2.FirstOrDefault().CompanyIdentifier;
             model.CompanyName = list2.FirstOrDefault().CompanyName;
             return View("AddActivity", model);
-
         }
 
 
