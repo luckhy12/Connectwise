@@ -134,6 +134,7 @@ namespace FerrumChromeDev.Controllers
                     obj.LastName = current2.LastName;
                     obj.Type = current2.Type;
                     obj.CompanyName = current2.CompanyName;
+                    obj.ContactId = current2.Id;
                 }
             }
            // var phoneno = "2242307730";

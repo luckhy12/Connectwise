@@ -25,7 +25,7 @@
        columns.Add(model => model.Id).Titled("Service Ticket")
         .Filterable(true).Sanitized(false).Encoded(false).RenderValueAs(foo => "<a href='https://control.mysupport247.net/v4_6_release/services/system_io/Service/fv_sr100_request.rails?service_recid=" + @foo.Id + "&companyName=MySupport247' target='_blank'>" + foo.Id + "</a>")
           .Filterable(false).Sanitized(false).Encoded(false);
-   }).WithPaging(10).Sortable(true)
+   }).WithPaging(4).Sortable(true)
 
                 </div>
 

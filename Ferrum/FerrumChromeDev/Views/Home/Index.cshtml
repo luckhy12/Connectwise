@@ -47,7 +47,7 @@
             <div class="ferrum_wd">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="call"><img src="~/Content/images/logo.png"><span class="call_ot">OUTGOING CALL</span></div>
+                        <div class="call"><img src="~/Content/images/logo.png"><span class="call_ot">INCOMING CALL</span></div>
                     </div>
                     <div class="col-md-12">
                         <div class="cl_bc">
@@ -60,7 +60,7 @@
                                         <h4 class="ferrum_hd_cl">@Model.FirstName @Model.LastName</h4>
                                         <h4 class="ferrum_hd">@Model.CompanyName</h4>
                                         <h4 id="phoneNoLabel" class="ferrum_nb">@Model.Phone</h4>
-                                        <div class="btn_link"><a href="https://control.mysupport247.net/v4_6_release/services/system_io/router/openrecord.rails?locale=en_US&recordType=ContactFV&companyName=MySupport247&recid=10788">Load</a></div>
+                                        <div class="btn_link"><a target="_blank" href="https://control.mysupport247.net/v4_6_release/services/system_io/router/openrecord.rails?locale=en_US&recordType=ContactFV&companyName=MySupport247&recid=@Model.ContactId">Load</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@ else
                                             <div class="ferrum_wd">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <div class="call"><img src="~/Content/images/logo.png"><span class="call_ot">OUTGOING CALL</span></div>
+                                                        <div class="call"><img src="~/Content/images/logo.png"><span class="call_ot">INCOMING CALL</span></div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="cl_bc">
@@ -232,7 +232,7 @@ else
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"> Ticket Note</h4>
+                    <h4 class="modal-title"> Activity Note</h4>
                 </div>
                 <div  class="modal-body">
                     <p id="NoteText"> </p>
